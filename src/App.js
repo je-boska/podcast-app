@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './App.css'
-import getPodcasts from './PodcastRequests'
+import searchPodcasts from './PodcastRequests'
 
 function App() {
   const [podcasts, setPodcasts] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const updatePodcastState = async () => {
-    const newPodcasts = await getPodcasts()
+  const submitHandler = async e => {
+    e.preventDefault()
+    const newPodcasts = await searchPodcasts(searchTerm)
     setPodcasts(newPodcasts)
   }
 
-  useEffect(() => {
-    updatePodcastState()
-    // eslint-disable-next-line
-  }, [])
-
   return (
     <div className='App'>
+      <form onSubmit={e => submitHandler(e)}>
+        <input
+          placeholder='Search podcasts'
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+        />
+      </form>
       {podcasts.map(podcast => (
         <div key={podcast.collectionId}>
           <p>{podcast.collectionName}</p>
