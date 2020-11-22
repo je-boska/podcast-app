@@ -14,21 +14,14 @@
   mask-image: linear-gradient(to top, transparent 15%, black 85%);
 }
 
-.player audio {
-  background-color: white;
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 2px solid rgb(202, 202, 202);
-  border-radius: 40px;
-  opacity: 0.7;
-}
-
 .player .title {
   width: 100%;
   position: absolute;
   top: 63%;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.play-pause-button {
+  cursor: pointer;
 }

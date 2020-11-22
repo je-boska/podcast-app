@@ -26,8 +26,9 @@ const EpisodeList = ({ match }) => {
       {episodes.map(episode => (
         <Link
           to={`/player/${match.params.id}/${episode.trackId}`}
-          style={{ textDecoration: 'none' }}>
-          <EpisodeListItem key={episode.trackId} episode={episode} />
+          style={{ textDecoration: 'none' }}
+          key={episode.trackId}>
+          <EpisodeListItem episode={episode} />
         </Link>
       ))}
     </div>

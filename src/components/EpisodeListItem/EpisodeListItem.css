@@ -1,7 +1,7 @@
 .episode-list-item {
   display: flex;
   flex-wrap: nowrap;
-  margin: 10px 2px;
+  margin: 2px;
   height: 100px;
   overflow: hidden;
   color: black;

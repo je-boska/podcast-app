@@ -4,6 +4,9 @@ import { lookupEpisodes } from '../../PodcastRequests'
 
 const Player = ({ match }) => {
   const [episode, setEpisode] = useState([])
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  const audio = document.getElementById('audio')
 
   const getEpisode = async () => {
     const episodes = await lookupEpisodes(match.params.id)
@@ -18,15 +21,32 @@ const Player = ({ match }) => {
     getEpisode()
     //eslint-disable-next-line
   }, [])
+
+  const play = () => {
+    audio.play()
+    setIsPlaying(true)
+  }
+  const pause = () => {
+    audio.pause()
+    setIsPlaying(false)
+  }
+
   return (
     <div className='player'>
       <div className='player-image gradient-overlay'>
         <img src={episode.artworkUrl600} alt={episode.trackName} />
       </div>
       <h3 className='title'>{episode.trackName}</h3>
-      <audio controls src={episode.episodeUrl}>
+      <audio id='audio' src={episode.episodeUrl}>
         No audio
       </audio>
+      <h2 className='play-pause-button'>
+        {isPlaying ? (
+          <i onClick={pause} className='fas fa-pause' />
+        ) : (
+          <i onClick={play} className='fas fa-play' />
+        )}
+      </h2>
     </div>
   )
 }
