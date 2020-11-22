@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Search.css'
-import searchPodcasts from '../../PodcastRequests'
+import { searchPodcasts } from '../../PodcastRequests'
 import PodcastListItem from '../PodcastListItem/PodcastListItem'
 
 const Search = () => {
@@ -23,7 +23,7 @@ const Search = () => {
       </form>
       <div className='podcast-list'>
         {podcasts.map(podcast => (
-          <PodcastListItem podcast={podcast} />
+          <PodcastListItem key={podcast.collectionId} podcast={podcast} />
         ))}
       </div>
     </div>

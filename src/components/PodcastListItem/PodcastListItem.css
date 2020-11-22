@@ -5,8 +5,12 @@
   align-items: center;
 }
 
-.podcast-list-item h3 {
+.podcast-list-item-text {
   margin: 20px;
-  opacity: 0.9;
   color: black;
+  opacity: 0.9;
+}
+
+.podcast-list-item-text h3 {
+  padding: 10px 0px;
 }

@@ -3,11 +3,23 @@ import { Link } from 'react-router-dom'
 import './PodcastListItem.css'
 
 const PodcastListItem = ({ podcast }) => {
+  const {
+    collectionId,
+    collectionName,
+    artworkUrl100,
+    primaryGenreName,
+  } = podcast
+
   return (
-    <Link to='/podcast' style={{ textDecoration: 'none' }}>
-      <div key={podcast.collectionId} className='podcast-list-item'>
-        <img src={podcast.artworkUrl100} alt={podcast.collectionName} />
-        <h3>{podcast.collectionName}</h3>
+    <Link
+      to={`/episode-list/${collectionId}`}
+      style={{ textDecoration: 'none' }}>
+      <div key={collectionId} className='podcast-list-item'>
+        <img src={artworkUrl100} alt={collectionName} />
+        <div className='podcast-list-item-text'>
+          <h3>{collectionName}</h3>
+          <p>{primaryGenreName}</p>
+        </div>
       </div>
     </Link>
   )

@@ -5,7 +5,7 @@ import Header from './components/Header/Header'
 import Search from './components/Search/Search'
 import Subscriptions from './components/Subscriptions/Subscriptions'
 import Player from './components/Player/Player'
-import Podcast from './components/Podcast/Podcast'
+import EpisodeList from './components/EpisodeList/EpisodeList'
 
 function App() {
   return (
@@ -15,8 +15,8 @@ function App() {
         <Route path='/' component={Search} exact />
         <Route path='/search' component={Search} />
         <Route path='/subscriptions' component={Subscriptions} />
-        <Route path='/player' component={Player} />
-        <Route path='/podcast' component={Podcast} />
+        <Route path='/player/:id/:trackId' component={Player} />
+        <Route path='/episode-list/:id' component={EpisodeList} />
       </Router>
     </div>
   )

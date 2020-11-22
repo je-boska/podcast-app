@@ -1,0 +1,17 @@
+.episode-list-item {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 10px 2px;
+  height: 100px;
+  overflow: hidden;
+  color: black;
+}
+
+.episode-list-item p {
+  font-size: 12px;
+}
+
+.episode-list-item img {
+  width: 100px;
+  height: 100px;
+}
