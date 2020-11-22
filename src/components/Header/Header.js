@@ -13,7 +13,7 @@ const Header = () => {
           <i className='fas fa-list header-item' />
         </Link>
         <Link to='/player'>
-          <i className='fas fa-play header-item' />
+          <i className='fas fa-headphones-alt header-item' />
         </Link>
       </h2>
     </header>

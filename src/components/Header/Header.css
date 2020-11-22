@@ -1,18 +1,15 @@
-header {
-  background-color: black;
-}
-
-header a {
-  color: white;
-}
-
 .header {
+  background-color: black;
   margin: 0 auto;
-  padding: 20px 0px;
+  padding: 10px 0px;
   display: flex;
   width: 100%;
   justify-content: center;
   text-align: center;
+  color: white;
+}
+
+.header a {
   color: white;
 }
 
