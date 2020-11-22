@@ -1,0 +1,17 @@
+.search-bar {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0px 20px 0px;
+}
+
+.search-bar input {
+  padding: 10px;
+}
+
+.podcast-list {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+}

@@ -1,22 +1,6 @@
 * {
   font-family: helvetica;
-}
-
-.searchBar {
-  width: 100%;
-  text-align: center;
-  margin: 30px;
-}
-
-.podcast-list {
-  width: 80%;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.podcast {
-  width: 100px;
-  height: 200px;
-  margin: 30px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }

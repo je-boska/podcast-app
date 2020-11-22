@@ -1,0 +1,11 @@
+.podcast-list-item {
+  width: 100%;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.podcast-list-item h3 {
+  margin: 20px;
+  opacity: 0.9;
+}
