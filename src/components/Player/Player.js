@@ -26,6 +26,7 @@ const Player = ({ match }) => {
     audio.play()
     setIsPlaying(true)
   }
+
   const pause = () => {
     audio.pause()
     setIsPlaying(false)
