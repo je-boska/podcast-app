@@ -1,0 +1,32 @@
+.bar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 85%;
+  user-select: none;
+  width: 90%;
+  display: flex;
+  align-items: center;
+}
+.bar__time {
+  color: black;
+  font-size: 12px;
+}
+
+.bar__progress {
+  flex: 1;
+  border-radius: 5px;
+  margin: 0 20px;
+  height: 3px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.bar__progress__knob {
+  position: relative;
+  height: 16px;
+  width: 16px;
+  border: 1.5px solid black;
+  border-radius: 50%;
+  background-color: black;
+}

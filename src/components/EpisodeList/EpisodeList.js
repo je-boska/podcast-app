@@ -20,13 +20,23 @@ const EpisodeList = ({ match }) => {
   return (
     <div className='episode-list'>
       <Link to='/search'>
-        <i className='fas fa-arrow-left' style={{ margin: '20px' }} />
+        <i
+          className='fas fa-arrow-left'
+          style={{
+            position: 'absolute',
+            zIndex: '1',
+            top: '15px',
+            left: '20px',
+            color: 'white',
+            backgroundColor: 'black',
+          }}
+        />
       </Link>
 
       {episodes.map(episode => (
         <Link
           to={`/player/${match.params.id}/${episode.trackId}`}
-          style={{ textDecoration: 'none' }}
+          style={{ textDecoration: 'none', color: 'black' }}
           key={episode.trackId}>
           <EpisodeListItem episode={episode} />
         </Link>

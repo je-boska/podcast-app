@@ -17,15 +17,16 @@
 .player .title {
   width: 100%;
   position: absolute;
-  top: 60%;
+  top: 65%;
   left: 50%;
   transform: translateX(-50%);
+  opacity: 0.9;
 }
 
 .play-pause-button {
   cursor: pointer;
   position: absolute;
-  top: 70%;
+  top: 75%;
   left: 50%;
   transform: translateX(-50%);
 }

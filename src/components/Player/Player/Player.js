@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import './Player.css'
-import { lookupEpisodes } from '../../PodcastRequests'
+import { lookupEpisodes } from '../../../PodcastRequests'
+import Bar from '../Bar/Bar'
+import useAudioPlayer from '../useAudioPlayer'
 
 const Player = ({ match }) => {
-  const [episode, setEpisode] = useState([])
-  const [isPlaying, setIsPlaying] = useState(false)
+  const {
+    curTime,
+    duration,
+    playing,
+    setPlaying,
+    setClickedTime,
+  } = useAudioPlayer()
 
-  const audio = document.getElementById('audio')
+  const [episode, setEpisode] = useState([])
 
   const getEpisode = async () => {
     const episodes = await lookupEpisodes(match.params.id)
@@ -23,17 +31,28 @@ const Player = ({ match }) => {
   }, [])
 
   const play = () => {
-    audio.play()
-    setIsPlaying(true)
+    setPlaying(true)
   }
 
   const pause = () => {
-    audio.pause()
-    setIsPlaying(false)
+    setPlaying(false)
   }
 
   return (
     <div className='player'>
+      <Link to={`/episode-list/${match.params.id}`}>
+        <i
+          className='fas fa-arrow-left'
+          style={{
+            position: 'absolute',
+            zIndex: '1',
+            top: '15px',
+            left: '20px',
+            color: 'white',
+            backgroundColor: 'black',
+          }}
+        />
+      </Link>
       <div className='player-image gradient-overlay'>
         <img src={episode.artworkUrl600} alt={episode.trackName} />
       </div>
@@ -42,12 +61,17 @@ const Player = ({ match }) => {
         No audio
       </audio>
       <h2 className='play-pause-button'>
-        {isPlaying ? (
+        {playing ? (
           <i onClick={pause} className='fas fa-pause' />
         ) : (
           <i onClick={play} className='fas fa-play' />
         )}
       </h2>
+      <Bar
+        curTime={curTime}
+        duration={duration}
+        onTimeUpdate={time => setClickedTime(time)}
+      />
     </div>
   )
 }

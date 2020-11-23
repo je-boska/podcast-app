@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from './components/Header/Header'
 import Search from './components/Search/Search'
 import Subscriptions from './components/Subscriptions/Subscriptions'
-import Player from './components/Player/Player'
+import Player from './components/Player/Player/Player'
 import EpisodeList from './components/EpisodeList/EpisodeList'
 
 function App() {
