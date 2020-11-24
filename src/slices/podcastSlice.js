@@ -3,17 +3,22 @@ import { createSlice } from '@reduxjs/toolkit'
 const podcastSlice = createSlice({
   name: 'podcast',
   initialState: {
-    id: '',
+    podcastId: '',
+    episodeId: '',
   },
   reducers: {
     setPodcast: (state, action) => {
-      state.id = action.payload
+      state.podcastId = action.payload
+    },
+    setEpisode: (state, action) => {
+      state.episodeId = action.payload
     },
   },
 })
 
-export const { setPodcast } = podcastSlice.actions
+export const { setPodcast, setEpisode } = podcastSlice.actions
 
-export const selectPodcast = state => state.searchTerm.value
+export const selectPodcast = state => state.podcast.podcastId
+export const selectEpisode = state => state.podcast.episodeId
 
 export default podcastSlice.reducer

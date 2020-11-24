@@ -7,15 +7,15 @@ import EpisodeListItem from '../EpisodeListItem/EpisodeListItem'
 const EpisodeList = ({ match }) => {
   const [episodes, setEpisodes] = useState([])
 
-  const getPodcast = async () => {
-    const newEpisodes = await lookupEpisodes(match.params.id)
-    setEpisodes(newEpisodes.slice(1))
-  }
-
   useEffect(() => {
     getPodcast()
     //eslint-disable-next-line
   }, [])
+
+  const getPodcast = async () => {
+    const newEpisodes = await lookupEpisodes(match.params.id)
+    setEpisodes(newEpisodes.slice(1))
+  }
 
   return (
     <div className='episode-list'>
@@ -34,12 +34,7 @@ const EpisodeList = ({ match }) => {
       </Link>
 
       {episodes.map(episode => (
-        <Link
-          to={`/player/${match.params.id}/${episode.trackId}`}
-          style={{ textDecoration: 'none', color: 'black' }}
-          key={episode.trackId}>
-          <EpisodeListItem episode={episode} />
-        </Link>
+        <EpisodeListItem key={episode.trackId} episode={episode} />
       ))}
     </div>
   )
