@@ -1,10 +1,49 @@
-import React from 'react'
-import './Bar.css'
+import React, { useEffect } from 'react'
 import moment from 'moment'
+// eslint-disable-next-line
 import momentDurationFormatSetup from 'moment-duration-format'
 
-export default function Bar({ duration, curTime, onTimeUpdate }) {
-  const curPercentage = (curTime / duration) * 100
+import './Bar.css'
+
+import useAudioPlayer from '../useAudioPlayer'
+
+export default function Bar() {
+  const { values, setDuration, setCurTime, setClickedTime } = useAudioPlayer()
+
+  const { duration, curTime, clickedTime, seekTime, seeking } = values
+
+  useEffect(() => {
+    const audio = document.getElementById('audio')
+
+    // state setters wrappers
+    const setAudioData = () => {
+      setDuration(audio.duration)
+      setCurTime(audio.currentTime)
+    }
+
+    const setAudioTime = () => {
+      setCurTime(audio.currentTime)
+    }
+
+    // DOM listeners: update React state on DOM events
+    audio.addEventListener('loadeddata', setAudioData)
+    audio.addEventListener('timeupdate', setAudioTime)
+
+    if (clickedTime && clickedTime !== curTime) {
+      audio.currentTime = clickedTime
+      setClickedTime(null)
+    }
+
+    // effect cleanup
+    return () => {
+      audio.removeEventListener('loadeddata', setAudioData)
+      audio.removeEventListener('timeupdate', setAudioTime)
+    }
+  })
+
+  const curPercentage = seeking
+    ? (seekTime / duration) * 100
+    : (curTime / duration) * 100
 
   function formatDuration(duration) {
     return moment.duration(duration, 'seconds').format('mm:ss', { trim: false })
@@ -21,17 +60,7 @@ export default function Bar({ duration, curTime, onTimeUpdate }) {
   }
 
   function handleTimeDrag(e) {
-    onTimeUpdate(calcClickedTime(e))
-
-    const updateTimeOnMove = eMove => {
-      onTimeUpdate(calcClickedTime(eMove))
-    }
-
-    document.addEventListener('mousemove', updateTimeOnMove)
-
-    document.addEventListener('mouseup', () => {
-      document.removeEventListener('mousemove', updateTimeOnMove)
-    })
+    setClickedTime(calcClickedTime(e))
   }
 
   return (
@@ -42,10 +71,14 @@ export default function Bar({ duration, curTime, onTimeUpdate }) {
         style={{
           background: `linear-gradient(to right, black ${curPercentage}%, lightGrey 0)`,
         }}
-        onMouseDown={e => handleTimeDrag(e)}>
+        onMouseDown={handleTimeDrag}>
         <span
           className='bar__progress__knob'
-          style={{ left: `${curPercentage - 2}%` }}
+          style={{
+            left: `${
+              curPercentage > 0 && curPercentage < 100 && curPercentage - 2
+            }%`,
+          }}
         />
       </div>
       <span className='bar__time'>{formatDuration(duration)}</span>

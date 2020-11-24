@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
 }
+
 .bar__time {
   color: black;
   font-size: 12px;
@@ -15,13 +16,14 @@
 
 .bar__progress {
   flex: 1;
-  border-radius: 5px;
   margin: 0 20px;
   height: 3px;
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: 0.15s opacity linear;
 }
+
 .bar__progress__knob {
   position: relative;
   height: 16px;
@@ -29,4 +31,8 @@
   border: 1.5px solid black;
   border-radius: 50%;
   background-color: black;
+}
+
+.bar__progress:hover {
+  opacity: 0.7;
 }

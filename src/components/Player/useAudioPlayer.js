@@ -1,47 +1,58 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 function useAudioPlayer() {
-  const [duration, setDuration] = useState()
-  const [curTime, setCurTime] = useState()
-  const [playing, setPlaying] = useState(false)
-  const [clickedTime, setClickedTime] = useState()
+  const initialValues = {
+    duration: 0,
+    curTime: 0,
+    seekTime: 0,
+    playing: false,
+    clickedTime: null,
+  }
 
-  useEffect(() => {
-    const audio = document.getElementById('audio')
+  const [values, setValues] = useState(initialValues)
 
-    // state setters wrappers
-    const setAudioData = () => {
-      setDuration(audio.duration)
-      setCurTime(audio.currentTime)
-    }
+  function setDuration(duration) {
+    setValues(prev => ({
+      ...prev,
+      duration,
+    }))
+  }
 
-    const setAudioTime = () => setCurTime(audio.currentTime)
+  function setCurTime(curTime) {
+    setValues(prev => ({
+      ...prev,
+      curTime,
+    }))
+  }
 
-    // DOM listeners: update React state on DOM events
-    audio.addEventListener('loadeddata', setAudioData)
-    audio.addEventListener('timeupdate', setAudioTime)
+  function setSeekTime(seekTime) {
+    setValues(prev => ({
+      ...prev,
+      seekTime,
+    }))
+  }
 
-    // React state listeners: update DOM on React state changes
-    playing ? audio.play() : audio.pause()
+  function setPlaying(playing) {
+    setValues(prev => ({
+      ...prev,
+      playing,
+    }))
+  }
 
-    if (clickedTime && clickedTime !== curTime) {
-      audio.currentTime = clickedTime
-      setClickedTime(null)
-    }
-
-    // effect cleanup
-    return () => {
-      audio.removeEventListener('loadeddata', setAudioData)
-      audio.removeEventListener('timeupdate', setAudioTime)
-    }
-  }, [playing, clickedTime, curTime])
+  function setClickedTime(clickedTime) {
+    setValues(prev => ({
+      ...prev,
+      clickedTime,
+    }))
+  }
 
   return {
-    curTime,
-    duration,
-    playing,
+    values,
+    setDuration,
+    setCurTime,
     setPlaying,
     setClickedTime,
+    setSeekTime,
   }
 }
 

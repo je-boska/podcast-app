@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+
 import './Player.css'
+
 import { lookupEpisodes } from '../../../PodcastRequests'
+
 import Bar from '../Bar/Bar'
+import Play from '../Play/Play'
 import useAudioPlayer from '../useAudioPlayer'
 
 const Player = ({ match }) => {
-  const {
-    curTime,
-    duration,
-    playing,
-    setPlaying,
-    setClickedTime,
-  } = useAudioPlayer()
+  const { values, setPlaying } = useAudioPlayer()
+
+  const { playing } = values
 
   const [episode, setEpisode] = useState([])
 
@@ -29,14 +29,6 @@ const Player = ({ match }) => {
     getEpisode()
     //eslint-disable-next-line
   }, [])
-
-  const play = () => {
-    setPlaying(true)
-  }
-
-  const pause = () => {
-    setPlaying(false)
-  }
 
   return (
     <div className='player'>
@@ -60,18 +52,8 @@ const Player = ({ match }) => {
       <audio id='audio' src={episode.episodeUrl}>
         No audio
       </audio>
-      <h2 className='play-pause-button'>
-        {playing ? (
-          <i onClick={pause} className='fas fa-pause' />
-        ) : (
-          <i onClick={play} className='fas fa-play' />
-        )}
-      </h2>
-      <Bar
-        curTime={curTime}
-        duration={duration}
-        onTimeUpdate={time => setClickedTime(time)}
-      />
+      <Play playing={playing} setPlaying={setPlaying} />
+      <Bar playing={playing} />
     </div>
   )
 }
