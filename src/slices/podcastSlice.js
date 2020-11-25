@@ -8,7 +8,7 @@ const podcastSlice = createSlice({
   },
   reducers: {
     setEpisodes: (state, action) => {
-      state.episodes = state.episodes.concat(action.payload)
+      state.episodes = action.payload
     },
     setCurrentEpisode: (state, action) => {
       state.currentEpisode = action.payload
