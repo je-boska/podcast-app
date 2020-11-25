@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { setPodcast } from '../../slices/podcastSlice'
+import { setEpisodes } from '../../slices/podcastSlice'
 import { addSubscription } from '../../slices/subscriptionsSlice'
+import { lookupEpisodes } from '../../PodcastRequests'
 import './PodcastListItem.css'
 
 const PodcastListItem = ({ podcast }) => {
@@ -15,8 +16,9 @@ const PodcastListItem = ({ podcast }) => {
 
   const dispatch = useDispatch()
 
-  const selectPodcastHandler = () => {
-    dispatch(setPodcast(collectionId))
+  const selectPodcastHandler = async () => {
+    const episodes = await lookupEpisodes(collectionId)
+    dispatch(setEpisodes(episodes.slice(1)))
   }
 
   const subscribeHandler = () => {

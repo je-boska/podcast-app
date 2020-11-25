@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { setEpisode } from '../../slices/podcastSlice'
+import { setCurrentEpisode } from '../../slices/podcastSlice'
 import './EpisodeListItem.css'
 
 const EpisodeListItem = ({ episode }) => {
@@ -16,7 +16,7 @@ const EpisodeListItem = ({ episode }) => {
   const dispatch = useDispatch()
 
   const selectEpisodeHandler = () => {
-    dispatch(setEpisode(trackId))
+    dispatch(setCurrentEpisode(episode))
   }
 
   return (

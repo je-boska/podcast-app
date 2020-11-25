@@ -1,21 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './EpisodeList.css'
 import { Link } from 'react-router-dom'
-import { lookupEpisodes } from '../../PodcastRequests'
 import EpisodeListItem from '../EpisodeListItem/EpisodeListItem'
+import { selectEpisodes } from '../../slices/podcastSlice'
+import { useSelector } from 'react-redux'
 
-const EpisodeList = ({ match }) => {
-  const [episodes, setEpisodes] = useState([])
-
-  useEffect(() => {
-    getPodcast()
-    //eslint-disable-next-line
-  }, [])
-
-  const getPodcast = async () => {
-    const newEpisodes = await lookupEpisodes(match.params.id)
-    setEpisodes(newEpisodes.slice(1))
-  }
+const EpisodeList = () => {
+  const episodes = useSelector(selectEpisodes)
 
   return (
     <div className='episode-list'>
