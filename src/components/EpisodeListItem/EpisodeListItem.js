@@ -5,13 +5,7 @@ import { setCurrentEpisode } from '../../slices/podcastSlice'
 import './EpisodeListItem.css'
 
 const EpisodeListItem = ({ episode }) => {
-  const {
-    artworkUrl160,
-    trackName,
-    releaseDate,
-    trackId,
-    collectionId,
-  } = episode
+  const { artworkUrl160, trackName, releaseDate } = episode
 
   const dispatch = useDispatch()
 
@@ -21,7 +15,7 @@ const EpisodeListItem = ({ episode }) => {
 
   return (
     <Link
-      to={`/player/${collectionId}/${trackId}`}
+      to={`/player`}
       style={{ textDecoration: 'none', color: 'black' }}
       onClick={selectEpisodeHandler}>
       <div className='episode-list-item'>

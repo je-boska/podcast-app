@@ -1,37 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectCurrentEpisode } from '../../../slices/podcastSlice'
 import './Player.css'
 
-import { lookupEpisodes } from '../../../PodcastRequests'
-
+import useAudioPlayer from '../useAudioPlayer'
 import Bar from '../Bar/Bar'
 import Play from '../Play/Play'
-import useAudioPlayer from '../useAudioPlayer'
 
-const Player = ({ match }) => {
+const Player = () => {
   const { values, setPlaying } = useAudioPlayer()
 
   const { playing } = values
 
-  const [episode, setEpisode] = useState([])
+  const episode = useSelector(selectCurrentEpisode)
 
-  const getEpisode = async () => {
-    const episodes = await lookupEpisodes(match.params.id)
-    setEpisode(
-      episodes.filter(
-        episode => episode.trackId === Number(match.params.trackId)
-      )[0]
-    )
-  }
-
-  useEffect(() => {
-    getEpisode()
-    //eslint-disable-next-line
-  }, [])
+  const { trackName, artworkUrl600, episodeUrl } = episode
 
   return (
     <div className='player'>
-      <Link to={`/episode-list/${match.params.id}`}>
+      <Link to={`/episode-list`}>
         <i
           className='fas fa-arrow-left'
           style={{
@@ -45,10 +33,10 @@ const Player = ({ match }) => {
         />
       </Link>
       <div className='player-image gradient-overlay'>
-        <img src={episode.artworkUrl600} alt={episode.trackName} />
+        <img src={artworkUrl600} alt={trackName} />
       </div>
-      <h3 className='title'>{episode.trackName}</h3>
-      <audio id='audio' src={episode.episodeUrl}>
+      <h3 className='title'>{trackName}</h3>
+      <audio id='audio' src={episodeUrl}>
         No audio
       </audio>
       <Play playing={playing} setPlaying={setPlaying} />

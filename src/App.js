@@ -15,8 +15,8 @@ function App() {
         <Route path='/' component={Search} exact />
         <Route path='/search' component={Search} />
         <Route path='/subscriptions' component={SubscriptionsList} />
-        <Route path='/player/:id/:trackId' component={Player} />
-        <Route path='/episode-list/:id' component={EpisodeList} />
+        <Route path='/player' component={Player} />
+        <Route path='/episode-list' component={EpisodeList} />
       </Router>
     </div>
   )

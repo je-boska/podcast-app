@@ -27,7 +27,7 @@ const PodcastListItem = ({ podcast }) => {
 
   return (
     <Link
-      to={`/episode-list/${collectionId}`}
+      to={`/episode-list`}
       style={{ textDecoration: 'none' }}
       onClick={selectPodcastHandler}>
       <div key={collectionId} className='podcast-list-item'>
