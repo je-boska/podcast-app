@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './Search.css'
 import { searchPodcasts } from '../../PodcastRequests'
-import PodcastListItem from '../PodcastListItem/PodcastListItem'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectSearchTerm, setSearchTerm } from '../../slices/searchTermSlice'
+import {
+  selectSearchTerm,
+  setSearchTerm,
+  setSearchResults,
+  selectSearchResults,
+} from '../../slices/searchSlice'
+
+import PodcastListItem from '../PodcastListItem/PodcastListItem'
 
 const Search = () => {
   const dispatch = useDispatch()
   const searchTerm = useSelector(selectSearchTerm)
-
-  const [results, setResults] = useState([])
-
-  useEffect(() => {
-    getSearchResults()
-    //eslint-disable-next-line
-  }, [])
+  const results = useSelector(selectSearchResults)
 
   const getSearchResults = async () => {
-    const newPodcasts = await searchPodcasts(searchTerm)
-    setResults(newPodcasts)
+    const newResults = await searchPodcasts(searchTerm)
+    dispatch(setSearchResults(newResults))
   }
 
   const submitHandler = e => {

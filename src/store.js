@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import searchTermReducer from './slices/searchTermSlice'
+import searchReducer from './slices/searchSlice'
 import podcastReducer from './slices/podcastSlice'
 import subscriptionsReducer from './slices/subscriptionsSlice'
 
 export default configureStore({
   reducer: {
-    searchTerm: searchTermReducer,
+    search: searchReducer,
     podcast: podcastReducer,
     subscriptions: subscriptionsReducer,
   },
