@@ -4,9 +4,10 @@ function useAudioPlayer() {
   const initialValues = {
     duration: 0,
     curTime: 0,
-    seekTime: 0,
     playing: false,
     clickedTime: null,
+    seeking: false,
+    seekTime: 0,
   }
 
   const [values, setValues] = useState(initialValues)
@@ -32,6 +33,13 @@ function useAudioPlayer() {
     }))
   }
 
+  function setSeeking(seeking) {
+    setValues(prev => ({
+      ...prev,
+      seeking,
+    }))
+  }
+
   function setPlaying(playing) {
     setValues(prev => ({
       ...prev,
@@ -53,6 +61,7 @@ function useAudioPlayer() {
     setPlaying,
     setClickedTime,
     setSeekTime,
+    setSeeking,
   }
 }
 

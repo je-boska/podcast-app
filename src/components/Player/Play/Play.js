@@ -1,16 +1,12 @@
 import React from 'react'
 
 const Play = ({ playing, setPlaying }) => {
-  const audio = document.getElementById('audio')
-
   const play = () => {
     setPlaying(true)
-    audio.play()
   }
 
   const pause = () => {
     setPlaying(false)
-    audio.pause()
   }
 
   return (

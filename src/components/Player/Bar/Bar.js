@@ -1,14 +1,20 @@
 import React, { useEffect } from 'react'
+import './Bar.css'
 import moment from 'moment'
 // eslint-disable-next-line
 import momentDurationFormatSetup from 'moment-duration-format'
 
-import './Bar.css'
-
 import useAudioPlayer from '../useAudioPlayer'
 
-export default function Bar() {
-  const { values, setDuration, setCurTime, setClickedTime } = useAudioPlayer()
+export default function Bar({ playing }) {
+  const {
+    values,
+    setDuration,
+    setCurTime,
+    setClickedTime,
+    setSeeking,
+    setSeekTime,
+  } = useAudioPlayer()
 
   const { duration, curTime, clickedTime, seekTime, seeking } = values
 
@@ -34,6 +40,8 @@ export default function Bar() {
       setClickedTime(null)
     }
 
+    playing ? audio.play() : audio.pause()
+
     // effect cleanup
     return () => {
       audio.removeEventListener('loadeddata', setAudioData)
@@ -49,7 +57,7 @@ export default function Bar() {
     return moment.duration(duration, 'seconds').format('mm:ss', { trim: false })
   }
 
-  function calcClickedTime(e) {
+  function calcMouseTime(e) {
     const clickPositionInPage = e.pageX
     const bar = document.querySelector('.bar__progress')
     const barStart = bar.getBoundingClientRect().left + window.scrollX
@@ -60,7 +68,20 @@ export default function Bar() {
   }
 
   function handleTimeDrag(e) {
-    setClickedTime(calcClickedTime(e))
+    setClickedTime(calcMouseTime(e))
+    setSeeking(true)
+
+    function updateTimeOnMove(e) {
+      setClickedTime(calcMouseTime(e))
+      setSeekTime(calcMouseTime(e))
+    }
+
+    document.addEventListener('mousemove', updateTimeOnMove)
+
+    document.addEventListener('mouseup', () => {
+      document.removeEventListener('mousemove', updateTimeOnMove)
+      setSeeking(false)
+    })
   }
 
   return (
@@ -71,7 +92,7 @@ export default function Bar() {
         style={{
           background: `linear-gradient(to right, black ${curPercentage}%, lightGrey 0)`,
         }}
-        onMouseDown={handleTimeDrag}>
+        onMouseDown={e => handleTimeDrag(e)}>
         <span
           className='bar__progress__knob'
           style={{
