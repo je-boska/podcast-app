@@ -5,6 +5,9 @@ import moment from 'moment'
 import momentDurationFormatSetup from 'moment-duration-format'
 
 import useAudioPlayer from '../useAudioPlayer'
+import { selectLoading, setLoading } from '../../../slices/podcastSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import Loader from '../../Loader/Loader'
 
 export default function Bar({ playing }) {
   const {
@@ -18,11 +21,20 @@ export default function Bar({ playing }) {
 
   const { duration, curTime, clickedTime, seekTime, seeking } = values
 
+  const dispatch = useDispatch()
+  const loading = useSelector(selectLoading)
+
+  useEffect(() => {
+    dispatch(setLoading(true))
+    // eslint-disable-next-line
+  }, [])
+
   useEffect(() => {
     const audio = document.getElementById('audio')
 
     // state setters wrappers
     const setAudioData = () => {
+      dispatch(setLoading(false))
       setDuration(audio.duration)
       setCurTime(audio.currentTime)
     }
@@ -86,23 +98,29 @@ export default function Bar({ playing }) {
 
   return (
     <div className='bar'>
-      <span className='bar__time'>{formatDuration(curTime)}</span>
-      <div
-        className='bar__progress'
-        style={{
-          background: `linear-gradient(to right, black ${curPercentage}%, lightGrey 0)`,
-        }}
-        onMouseDown={e => handleTimeDrag(e)}>
-        <span
-          className='bar__progress__knob'
-          style={{
-            left: `${
-              curPercentage > 0 && curPercentage < 100 && curPercentage - 2
-            }%`,
-          }}
-        />
-      </div>
-      <span className='bar__time'>{formatDuration(duration)}</span>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <span className='bar__time'>{formatDuration(curTime)}</span>
+          <div
+            className='bar__progress'
+            style={{
+              background: `linear-gradient(to right, black ${curPercentage}%, lightGrey 0)`,
+            }}
+            onMouseDown={e => handleTimeDrag(e)}>
+            <span
+              className='bar__progress__knob'
+              style={{
+                left: `${
+                  curPercentage > 0 && curPercentage < 100 && curPercentage - 2
+                }%`,
+              }}
+            />
+          </div>
+          <span className='bar__time'>{formatDuration(duration)}</span>
+        </>
+      )}
     </div>
   )
 }

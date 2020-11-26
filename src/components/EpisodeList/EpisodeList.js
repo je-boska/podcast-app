@@ -2,20 +2,27 @@ import React from 'react'
 import './EpisodeList.css'
 import { Link } from 'react-router-dom'
 import EpisodeListItem from '../EpisodeListItem/EpisodeListItem'
-import { selectEpisodes } from '../../slices/podcastSlice'
+import { selectEpisodes, selectLoading } from '../../slices/podcastSlice'
 import { useSelector } from 'react-redux'
+import Loader from '../Loader/Loader'
 
 const EpisodeList = () => {
   const episodes = useSelector(selectEpisodes)
-
-  const { artworkUrl600, collectionName } = episodes[0]
+  const loading = useSelector(selectLoading)
 
   return (
     <div className='episode-list'>
-      <section className='episode-list-hero'>
-        <img src={artworkUrl600} alt={collectionName} />
-        <h3 className='episode-list-title'>{collectionName}</h3>
-      </section>
+      {loading ? (
+        <Loader />
+      ) : (
+        <section className='episode-list-hero'>
+          <img
+            src={episodes[0].artworkUrl600}
+            alt={episodes[0].collectionName}
+          />
+          <h3 className='episode-list-title'>{episodes[0].collectionName}</h3>
+        </section>
+      )}
       <Link to='/search'>
         <i
           className='fas fa-arrow-left'
