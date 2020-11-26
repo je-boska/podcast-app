@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Search.css'
 import { searchPodcasts } from '../../PodcastRequests'
 import { useSelector, useDispatch } from 'react-redux'
@@ -13,18 +13,37 @@ import {
 
 import Loader from '../Loader/Loader'
 import PodcastListItem from '../PodcastListItem/PodcastListItem'
+import { selectSubscriptions } from '../../slices/subscriptionsSlice'
 
 const Search = () => {
   const dispatch = useDispatch()
   const loading = useSelector(selectLoading)
   const searchTerm = useSelector(selectSearchTerm)
   const results = useSelector(selectSearchResults)
+  const subscriptions = useSelector(selectSubscriptions)
+
+  useEffect(() => {
+    getSearchResults()
+    // eslint-disable-next-line
+  }, [subscriptions])
 
   const getSearchResults = async () => {
     dispatch(setLoading(true))
     const newResults = await searchPodcasts(searchTerm)
-    dispatch(setSearchResults(newResults))
+    const filteredResults = filterSubscriptions(newResults)
+    dispatch(setSearchResults(filteredResults))
     dispatch(setLoading(false))
+  }
+
+  const filterSubscriptions = searchResults => {
+    for (let i = 0; i < searchResults.length; i++) {
+      for (let j = 0; j < subscriptions.length; j++) {
+        if (searchResults[i].collectionId === subscriptions[j].collectionId) {
+          searchResults[i].subscribed = true
+        }
+      }
+    }
+    return searchResults
   }
 
   const submitHandler = e => {

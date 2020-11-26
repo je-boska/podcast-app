@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setEpisodes, setLoading } from '../../slices/podcastSlice'
-import { addSubscription } from '../../slices/subscriptionsSlice'
+import {
+  addSubscription,
+  removeSubscription,
+} from '../../slices/subscriptionsSlice'
 import { lookupEpisodes } from '../../PodcastRequests'
 import './PodcastListItem.css'
 
@@ -14,6 +17,12 @@ const PodcastListItem = ({ podcast }) => {
     primaryGenreName,
   } = podcast
 
+  const [subscribed, setSubscribed] = useState(false)
+
+  useEffect(() => {
+    podcast.subscribed && setSubscribed(true)
+  }, [subscribed, podcast])
+
   const dispatch = useDispatch()
 
   const selectPodcastHandler = async () => {
@@ -24,7 +33,17 @@ const PodcastListItem = ({ podcast }) => {
   }
 
   const subscribeHandler = () => {
-    dispatch(addSubscription(podcast))
+    if (subscribed || podcast.subscribed) {
+      dispatch(removeSubscription(podcast))
+      setSubscribed(false)
+    } else {
+      const subscribedPodcast = {
+        ...podcast,
+        subscribed: true,
+      }
+      dispatch(addSubscription(subscribedPodcast))
+      setSubscribed(true)
+    }
   }
 
   return (
@@ -44,7 +63,7 @@ const PodcastListItem = ({ podcast }) => {
         </div>
       </Link>
       <button className='subscribe-button' onClick={subscribeHandler}>
-        <h3>+</h3>
+        {subscribed ? <h4>UNSUBSCRIBE</h4> : <h4>SUBSCRIBE</h4>}
       </button>
     </div>
   )

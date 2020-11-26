@@ -10,7 +10,7 @@ body::-webkit-scrollbar {
 }
 
 button {
-  border: 1px solid black;
+  border: none;
   background-color: white;
   color: black;
   cursor: pointer;

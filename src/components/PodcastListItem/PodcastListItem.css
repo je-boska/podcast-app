@@ -25,14 +25,15 @@
 
 .subscribe-button {
   margin: 20px;
-  height: 35px;
-  width: 30px;
   background-color: black;
   color: white;
   transition: 0.15s all ease-in-out;
 }
 
+.subscribe-button h4 {
+  font-weight: 100;
+}
+
 .subscribe-button:hover {
-  color: black;
-  background-color: white;
+  background-color: rgb(85, 85, 85);
 }

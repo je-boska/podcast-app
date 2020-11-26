@@ -9,10 +9,16 @@ const subsciptionsSlice = createSlice({
     addSubscription: (state, action) => {
       state.subscriptions = state.subscriptions.concat(action.payload)
     },
+    removeSubscription: (state, action) => {
+      state.subscriptions = state.subscriptions.filter(
+        subscription =>
+          subscription.collectionId !== action.payload.collectionId
+      )
+    },
   },
 })
 
-export const { addSubscription } = subsciptionsSlice.actions
+export const { addSubscription, removeSubscription } = subsciptionsSlice.actions
 
 export const selectSubscriptions = state => state.subscriptions.subscriptions
 
