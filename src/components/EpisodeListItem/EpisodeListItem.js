@@ -21,7 +21,7 @@ const EpisodeListItem = ({ episode }) => {
       <div className='episode-list-item'>
         <img src={artworkUrl160} alt={trackName} />
         <div className='episode-list-item-text'>
-          <h4>{trackName}</h4>
+          <h3>{trackName}</h3>
           <p>{releaseDate.slice(0, 10)}</p>
         </div>
       </div>

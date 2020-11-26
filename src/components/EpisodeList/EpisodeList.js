@@ -8,8 +8,14 @@ import { useSelector } from 'react-redux'
 const EpisodeList = () => {
   const episodes = useSelector(selectEpisodes)
 
+  const { artworkUrl600, collectionName } = episodes[0]
+
   return (
     <div className='episode-list'>
+      <section className='episode-list-hero'>
+        <img src={artworkUrl600} alt={collectionName} />
+        <h3 className='episode-list-title'>{collectionName}</h3>
+      </section>
       <Link to='/search'>
         <i
           className='fas fa-arrow-left'

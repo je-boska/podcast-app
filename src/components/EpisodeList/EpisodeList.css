@@ -2,3 +2,16 @@
   width: 100%;
   margin-top: 10px;
 }
+
+.episode-list-hero {
+  text-align: center;
+}
+
+.episode-list img {
+  width: 50%;
+}
+
+.episode-list-title {
+  font-weight: 100;
+  margin: 20px;
+}

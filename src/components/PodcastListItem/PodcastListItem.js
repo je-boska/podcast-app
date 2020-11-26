@@ -26,19 +26,25 @@ const PodcastListItem = ({ podcast }) => {
   }
 
   return (
-    <Link
-      to={`/episode-list`}
-      style={{ textDecoration: 'none' }}
-      onClick={selectPodcastHandler}>
-      <div key={collectionId} className='podcast-list-item'>
+    <div key={collectionId} className='podcast-list-item'>
+      <Link
+        to={`/episode-list`}
+        style={{
+          textDecoration: 'none',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+        onClick={selectPodcastHandler}>
         <img src={artworkUrl100} alt={collectionName} />
         <div className='podcast-list-item-text'>
           <h3>{collectionName}</h3>
           <p>{primaryGenreName}</p>
-          <button onClick={subscribeHandler}>Subscribe</button>
         </div>
-      </div>
-    </Link>
+      </Link>
+      <button className='subscribe-button' onClick={subscribeHandler}>
+        <h3>+</h3>
+      </button>
+    </div>
   )
 }
 

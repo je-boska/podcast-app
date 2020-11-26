@@ -2,7 +2,7 @@ import React from 'react'
 import './SubscriptionsList.css'
 import { useSelector } from 'react-redux'
 import { selectSubscriptions } from '../../slices/subscriptionsSlice'
-import SubscriptionsListItem from '../SubscriptionsListItem/SubscriptionsListItem'
+import PodcastListItem from '../PodcastListItem/PodcastListItem'
 
 const SubscriptionsList = () => {
   const subscriptions = useSelector(selectSubscriptions)
@@ -11,11 +11,8 @@ const SubscriptionsList = () => {
     <>
       <h3 className='subscriptions-title'>Subscriptions</h3>
       <div className='subscriptions-list'>
-        {subscriptions.map(subscription => (
-          <SubscriptionsListItem
-            key={subscription.collectionId}
-            subscription={subscription}
-          />
+        {subscriptions.map(podcast => (
+          <PodcastListItem key={podcast.collectionId} podcast={podcast} />
         ))}
       </div>
     </>
