@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setEpisodes, setLoading } from '../../slices/podcastSlice'
 import {
   addSubscription,
   removeSubscription,
+  selectSubscriptions,
 } from '../../slices/subscriptionsSlice'
 import { lookupEpisodes } from '../../PodcastRequests'
 import './PodcastListItem.css'
@@ -19,11 +20,21 @@ const PodcastListItem = ({ podcast }) => {
 
   const [subscribed, setSubscribed] = useState(false)
 
-  useEffect(() => {
-    podcast.subscribed && setSubscribed(true)
-  }, [subscribed, podcast])
-
   const dispatch = useDispatch()
+  const subscriptions = useSelector(selectSubscriptions)
+
+  useEffect(() => {
+    checkIfSubscribed()
+    // eslint-disable-next-line
+  }, [])
+
+  const checkIfSubscribed = () => {
+    for (let i = 0; i < subscriptions.length; i++) {
+      if (collectionId === subscriptions[i].collectionId) {
+        setSubscribed(true)
+      }
+    }
+  }
 
   const selectPodcastHandler = async () => {
     dispatch(setLoading(true))
