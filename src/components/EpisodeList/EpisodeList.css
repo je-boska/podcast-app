@@ -15,12 +15,11 @@
 
 .episode-list-hero {
   text-align: center;
-  max-width: 600px;
+  max-width: 50%;
 }
 
 .episode-list-hero img {
-  width: 300px;
-  max-width: 600px;
+  max-width: 100%;
 }
 
 .episode-list-title {
@@ -28,12 +27,13 @@
   margin: 20px;
 }
 
-@media only sceen and (min-width: 1000px) {
+@media only screen and (min-width: 1000px) {
   .episode-list-container {
     flex-direction: row;
   }
 
-  .episode-list {
-    background-color: black;
+  .episode-list-hero {
+    align-self: start;
+    margin: 30px;
   }
 }
