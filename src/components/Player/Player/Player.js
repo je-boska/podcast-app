@@ -42,7 +42,7 @@ const Player = () => {
         <i
           className='fas fa-arrow-left'
           style={{
-            position: 'absolute',
+            position: 'fixed',
             zIndex: '1',
             top: '15px',
             left: '20px',
