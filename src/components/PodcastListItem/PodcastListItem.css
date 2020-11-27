@@ -23,17 +23,22 @@
   opacity: 0.7;
 }
 
-.subscribe-button {
+.subscribe-button,
+.unsubscribe-button {
   margin: 20px;
-  background-color: black;
   color: white;
   transition: 0.15s all ease-in-out;
 }
 
-.subscribe-button h4 {
-  font-weight: 100;
+.subscribe-button:hover,
+.unsubscribe-button:hover {
+  opacity: 0.7;
 }
 
-.subscribe-button:hover {
-  background-color: rgb(85, 85, 85);
+.subscribe-button {
+  background-color: green;
+}
+
+.unsubscribe-button {
+  background-color: rgb(196, 63, 63);
 }

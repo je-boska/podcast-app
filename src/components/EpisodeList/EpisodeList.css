@@ -1,17 +1,39 @@
+.episode-list-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
 .episode-list {
   width: 100%;
+  max-width: 600px;
   margin-top: 10px;
 }
 
 .episode-list-hero {
   text-align: center;
+  max-width: 600px;
 }
 
-.episode-list img {
-  width: 50%;
+.episode-list-hero img {
+  width: 300px;
+  max-width: 600px;
 }
 
 .episode-list-title {
   font-weight: 100;
   margin: 20px;
+}
+
+@media only sceen and (min-width: 1000px) {
+  .episode-list-container {
+    flex-direction: row;
+  }
+
+  .episode-list {
+    background-color: black;
+  }
 }

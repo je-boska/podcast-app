@@ -5,6 +5,7 @@
   top: 85%;
   user-select: none;
   width: 90%;
+  max-width: 800px;
   display: flex;
   align-items: center;
 }

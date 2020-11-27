@@ -11,18 +11,7 @@ const EpisodeList = () => {
   const loading = useSelector(selectLoading)
 
   return (
-    <div className='episode-list'>
-      {loading ? (
-        <Loader />
-      ) : (
-        <section className='episode-list-hero'>
-          <img
-            src={episodes[0].artworkUrl600}
-            alt={episodes[0].collectionName}
-          />
-          <h3 className='episode-list-title'>{episodes[0].collectionName}</h3>
-        </section>
-      )}
+    <>
       <Link to='/search'>
         <i
           className='fas fa-arrow-left'
@@ -36,11 +25,28 @@ const EpisodeList = () => {
           }}
         />
       </Link>
+      <div className='episode-list-container'>
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className='episode-list-hero'>
+            <img
+              src={episodes[0].artworkUrl600}
+              alt={episodes[0].collectionName}
+            />
+            <h3 className='episode-list-title'>{episodes[0].collectionName}</h3>
+          </div>
+        )}
 
-      {episodes.map(episode => (
-        <EpisodeListItem key={episode.trackId} episode={episode} />
-      ))}
-    </div>
+        <div className='episode-list'>
+          {loading
+            ? null
+            : episodes.map(episode => (
+                <EpisodeListItem key={episode.trackId} episode={episode} />
+              ))}
+        </div>
+      </div>
+    </>
   )
 }
 

@@ -9,7 +9,7 @@ export async function searchPodcasts(searchTerm) {
 }
 
 export async function lookupEpisodes(id) {
-  const lookupString = `lookup?id=${id}&media=podcast&entity=podcastEpisode&limit=10`
+  const lookupString = `lookup?id=${id}&media=podcast&entity=podcastEpisode&limit=50`
   const {
     data: { results },
   } = await axios.get(`https://itunes.apple.com/${lookupString}`)

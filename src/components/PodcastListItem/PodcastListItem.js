@@ -73,9 +73,15 @@ const PodcastListItem = ({ podcast }) => {
           <p>{primaryGenreName}</p>
         </div>
       </Link>
-      <button className='subscribe-button' onClick={subscribeHandler}>
-        {subscribed ? <h4>UNSUBSCRIBE</h4> : <h4>SUBSCRIBE</h4>}
-      </button>
+      {subscribed ? (
+        <button className='unsubscribe-button' onClick={subscribeHandler}>
+          <i className='fas fa-minus'></i>
+        </button>
+      ) : (
+        <button className='subscribe-button' onClick={subscribeHandler}>
+          <i className='fas fa-plus'></i>
+        </button>
+      )}
     </div>
   )
 }
