@@ -1,11 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './SubscriptionsList.css'
-import { useSelector } from 'react-redux'
-import { selectSubscriptions } from '../../slices/subscriptionsSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  selectSubscriptions,
+  setSubscriptions,
+} from '../../slices/subscriptionsSlice'
 import PodcastListItem from '../PodcastListItem/PodcastListItem'
 
 const SubscriptionsList = () => {
   const subscriptions = useSelector(selectSubscriptions)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const localSubscriptions = JSON.parse(localStorage.getItem('subscriptions'))
+    if (localSubscriptions) {
+      dispatch(setSubscriptions(localSubscriptions))
+    }
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <>

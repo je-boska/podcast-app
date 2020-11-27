@@ -6,6 +6,9 @@ const subsciptionsSlice = createSlice({
     subscriptions: [],
   },
   reducers: {
+    setSubscriptions: (state, action) => {
+      state.subscriptions = action.payload
+    },
     addSubscription: (state, action) => {
       state.subscriptions = state.subscriptions.concat(action.payload)
     },
@@ -18,7 +21,11 @@ const subsciptionsSlice = createSlice({
   },
 })
 
-export const { addSubscription, removeSubscription } = subsciptionsSlice.actions
+export const {
+  setSubscriptions,
+  addSubscription,
+  removeSubscription,
+} = subsciptionsSlice.actions
 
 export const selectSubscriptions = state => state.subscriptions.subscriptions
 

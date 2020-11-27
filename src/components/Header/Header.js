@@ -1,12 +1,8 @@
 import React from 'react'
 import './Header.css'
 import { Link } from 'react-router-dom'
-import { selectCurrentEpisode } from '../../slices/podcastSlice'
-import { useSelector } from 'react-redux'
 
 const Header = () => {
-  const { collectionId, trackId } = useSelector(selectCurrentEpisode)
-
   return (
     <header className='header'>
       <h2>
@@ -16,7 +12,7 @@ const Header = () => {
         <Link to='/subscriptions'>
           <i className='fas fa-list header-item' />
         </Link>
-        <Link to={`/player/${collectionId}/${trackId}`}>
+        <Link to={`/player`}>
           <i className='fas fa-headphones-alt header-item' />
         </Link>
       </h2>

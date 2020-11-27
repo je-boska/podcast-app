@@ -26,7 +26,7 @@ const EpisodeList = () => {
         />
       </Link>
       <div className='episode-list-container'>
-        {loading ? (
+        {loading || episodes.length < 1 ? (
           <Loader />
         ) : (
           <div className='episode-list-hero'>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Search.css'
 import { searchPodcasts } from '../../PodcastRequests'
 import { useSelector, useDispatch } from 'react-redux'
@@ -13,6 +13,7 @@ import {
 
 import Loader from '../Loader/Loader'
 import PodcastListItem from '../PodcastListItem/PodcastListItem'
+import { setSubscriptions } from '../../slices/subscriptionsSlice'
 
 const Search = () => {
   const dispatch = useDispatch()
@@ -20,10 +21,23 @@ const Search = () => {
   const searchTerm = useSelector(selectSearchTerm)
   const results = useSelector(selectSearchResults)
 
+  useEffect(() => {
+    const localResults = JSON.parse(localStorage.getItem('search-results'))
+    if (localResults) {
+      dispatch(setSearchResults(localResults))
+    }
+    const localSubscriptions = JSON.parse(localStorage.getItem('subscriptions'))
+    if (localSubscriptions) {
+      dispatch(setSubscriptions(localSubscriptions))
+    }
+    // eslint-disable-next-line
+  }, [])
+
   const getSearchResults = async () => {
     dispatch(setLoading(true))
     const newResults = await searchPodcasts(searchTerm)
     dispatch(setSearchResults(newResults))
+    localStorage.setItem('search-results', JSON.stringify(newResults))
     dispatch(setLoading(false))
   }
 

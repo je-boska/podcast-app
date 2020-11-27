@@ -44,9 +44,12 @@ const PodcastListItem = ({ podcast }) => {
   }
 
   const subscribeHandler = () => {
+    const localSubs = JSON.parse(localStorage.getItem('subscriptions'))
     if (subscribed || podcast.subscribed) {
       dispatch(removeSubscription(podcast))
       setSubscribed(false)
+      const newSubs = localSubs.filter(sub => sub.collectionId !== collectionId)
+      localStorage.setItem('subscriptions', JSON.stringify(newSubs))
     } else {
       const subscribedPodcast = {
         ...podcast,
@@ -54,6 +57,15 @@ const PodcastListItem = ({ podcast }) => {
       }
       dispatch(addSubscription(subscribedPodcast))
       setSubscribed(true)
+      if (localSubs) {
+        const newSubs = localSubs.concat(subscribedPodcast)
+        localStorage.setItem('subscriptions', JSON.stringify(newSubs))
+      } else {
+        localStorage.setItem(
+          'subscriptions',
+          JSON.stringify([subscribedPodcast])
+        )
+      }
     }
   }
 

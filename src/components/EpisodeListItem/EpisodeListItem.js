@@ -11,6 +11,7 @@ const EpisodeListItem = ({ episode }) => {
 
   const selectEpisodeHandler = () => {
     dispatch(setCurrentEpisode(episode))
+    localStorage.setItem('current-episode', JSON.stringify(episode))
   }
 
   return (
