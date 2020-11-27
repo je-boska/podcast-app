@@ -26,6 +26,8 @@
 .subscribe-button,
 .unsubscribe-button {
   margin: 20px;
+  height: 30px;
+  width: 30px;
   color: white;
   transition: 0.15s all ease-in-out;
 }
@@ -36,9 +38,9 @@
 }
 
 .subscribe-button {
-  background-color: green;
+  background-color: rgb(9, 137, 211);
 }
 
 .unsubscribe-button {
-  background-color: rgb(196, 63, 63);
+  background-color: rgb(255, 0, 157);
 }

@@ -22,10 +22,6 @@ const Search = () => {
   const results = useSelector(selectSearchResults)
 
   useEffect(() => {
-    const localResults = JSON.parse(localStorage.getItem('search-results'))
-    if (localResults) {
-      dispatch(setSearchResults(localResults))
-    }
     const localSubscriptions = JSON.parse(localStorage.getItem('subscriptions'))
     if (localSubscriptions) {
       dispatch(setSubscriptions(localSubscriptions))
@@ -37,7 +33,6 @@ const Search = () => {
     dispatch(setLoading(true))
     const newResults = await searchPodcasts(searchTerm)
     dispatch(setSearchResults(newResults))
-    localStorage.setItem('search-results', JSON.stringify(newResults))
     dispatch(setLoading(false))
   }
 
@@ -50,7 +45,7 @@ const Search = () => {
     <div className='search-container'>
       <form onSubmit={e => submitHandler(e)} className='search-bar'>
         <input
-          placeholder='Search podcasts'
+          placeholder='Search'
           value={searchTerm}
           onChange={e => dispatch(setSearchTerm(e.target.value))}
         />

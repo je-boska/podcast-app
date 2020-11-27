@@ -1,14 +1,19 @@
 .search-bar {
   width: 100%;
   text-align: center;
-  margin: 10px 0px 20px 0px;
+  margin: 10px 0px;
 }
 
 .search-bar input {
   font-size: 16px;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 12px 25px;
+  border-radius: 50px;
   border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.search-bar input:focus {
+  outline: none;
+  border: 1px solid black;
 }
 
 .podcast-list {

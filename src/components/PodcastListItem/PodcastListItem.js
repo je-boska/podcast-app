@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { setEpisodes, setLoading } from '../../slices/podcastSlice'
+import {
+  selectLoading,
+  setEpisodes,
+  setLoading,
+} from '../../slices/podcastSlice'
 import {
   addSubscription,
   removeSubscription,
   selectSubscriptions,
 } from '../../slices/subscriptionsSlice'
 import { lookupEpisodes } from '../../PodcastRequests'
+import Loader from '../../components/Loader/Loader'
 import './PodcastListItem.css'
 
 const PodcastListItem = ({ podcast }) => {
@@ -22,6 +27,7 @@ const PodcastListItem = ({ podcast }) => {
 
   const dispatch = useDispatch()
   const subscriptions = useSelector(selectSubscriptions)
+  const loading = useSelector(selectLoading)
 
   useEffect(() => {
     checkIfSubscribed()
@@ -29,11 +35,13 @@ const PodcastListItem = ({ podcast }) => {
   }, [])
 
   const checkIfSubscribed = () => {
+    dispatch(setLoading(true))
     for (let i = 0; i < subscriptions.length; i++) {
       if (collectionId === subscriptions[i].collectionId) {
         setSubscribed(true)
       }
     }
+    dispatch(setLoading(false))
   }
 
   const selectPodcastHandler = async () => {
@@ -85,7 +93,9 @@ const PodcastListItem = ({ podcast }) => {
           <p>{primaryGenreName}</p>
         </div>
       </Link>
-      {subscribed ? (
+      {loading ? (
+        <Loader />
+      ) : subscribed ? (
         <button className='unsubscribe-button' onClick={subscribeHandler}>
           <i className='fas fa-minus'></i>
         </button>

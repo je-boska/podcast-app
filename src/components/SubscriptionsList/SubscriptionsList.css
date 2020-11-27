@@ -3,3 +3,8 @@
   text-align: center;
   margin: 20px;
 }
+
+.subscriptions-list {
+  max-width: 600px;
+  margin: 0 auto;
+}
