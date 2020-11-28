@@ -19,7 +19,13 @@ const Player = () => {
   const { playing } = values
 
   const episode = useSelector(selectCurrentEpisode)
-  const { trackName, artworkUrl600, episodeUrl, collectionId } = episode
+  const {
+    trackName,
+    artworkUrl600,
+    episodeUrl,
+    collectionId,
+    trackId,
+  } = episode
 
   const dispatch = useDispatch()
 
@@ -60,7 +66,7 @@ const Player = () => {
           No audio
         </audio>
         <Play playing={playing} setPlaying={setPlaying} />
-        <Bar playing={playing} />
+        <Bar playing={playing} trackId={trackId} />
       </div>
     </>
   )

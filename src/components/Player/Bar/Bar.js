@@ -9,7 +9,7 @@ import { selectLoading, setLoading } from '../../../slices/podcastSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../Loader/Loader'
 
-export default function Bar({ playing }) {
+export default function Bar({ playing, trackId }) {
   const {
     values,
     setDuration,
@@ -26,11 +26,22 @@ export default function Bar({ playing }) {
 
   useEffect(() => {
     dispatch(setLoading(true))
+
+    const audio = document.getElementById('audio')
+    let podcastTimes = JSON.parse(localStorage.getItem('podcast-time'))
+    if (!podcastTimes || typeof podcastTimes !== 'object') {
+      podcastTimes = {}
+    }
+
+    if (trackId in podcastTimes) {
+      audio.currentTime = podcastTimes[trackId]
+    }
     // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
     const audio = document.getElementById('audio')
+    let podcastTimes = JSON.parse(localStorage.getItem('podcast-time'))
 
     // state setters wrappers
     const setAudioData = () => {
@@ -40,6 +51,8 @@ export default function Bar({ playing }) {
     }
 
     const setAudioTime = () => {
+      podcastTimes[trackId] = audio.currentTime
+      localStorage.setItem('podcast-time', JSON.stringify(podcastTimes))
       setCurTime(audio.currentTime)
     }
 
