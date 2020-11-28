@@ -86,11 +86,11 @@ const PodcastListItem = ({ podcast }) => {
         </div>
       </Link>
       {subscribed ? (
-        <button className='unsubscribe-button' onClick={subscribeHandler}>
+        <button className='button unsubscribe' onClick={subscribeHandler}>
           <i className='fas fa-minus'></i>
         </button>
       ) : (
-        <button className='subscribe-button' onClick={subscribeHandler}>
+        <button className='button subscribe' onClick={subscribeHandler}>
           <i className='fas fa-plus'></i>
         </button>
       )}

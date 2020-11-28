@@ -71,7 +71,7 @@ export default function Bar({ playing }) {
 
   function calcMouseTime(e) {
     const clickPositionInPage = e.pageX
-    const bar = document.querySelector('.bar__progress')
+    const bar = document.querySelector('.progress')
     const barStart = bar.getBoundingClientRect().left + window.scrollX
     const barWidth = bar.offsetWidth
     const clickPositionInBar = clickPositionInPage - barStart
@@ -102,15 +102,15 @@ export default function Bar({ playing }) {
         <Loader />
       ) : (
         <>
-          <span className='bar__time'>{formatDuration(curTime)}</span>
+          <span className='time'>{formatDuration(curTime)}</span>
           <div
-            className='bar__progress'
+            className='progress'
             style={{
               background: `linear-gradient(to right, black ${curPercentage}%, lightGrey 0)`,
             }}
             onMouseDown={e => handleTimeDrag(e)}>
             <span
-              className='bar__progress__knob'
+              className='knob'
               style={{
                 left: `${
                   curPercentage > 0 && curPercentage < 100 && curPercentage - 2
@@ -118,7 +118,7 @@ export default function Bar({ playing }) {
               }}
             />
           </div>
-          <span className='bar__time'>{formatDuration(duration)}</span>
+          <span className='time'>{formatDuration(duration)}</span>
         </>
       )}
     </div>

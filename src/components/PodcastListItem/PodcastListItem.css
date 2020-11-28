@@ -23,24 +23,26 @@
   opacity: 0.7;
 }
 
-.subscribe-button,
-.unsubscribe-button {
+.button {
   margin: 20px;
   height: 30px;
   width: 30px;
+  padding: 8px;
   color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
   transition: 0.15s all ease-in-out;
 }
 
-.subscribe-button:hover,
-.unsubscribe-button:hover {
+.button:hover {
   opacity: 0.7;
 }
 
-.subscribe-button {
+.subscribe {
   background-color: rgb(9, 137, 211);
 }
 
-.unsubscribe-button {
+.unsubscribe {
   background-color: rgb(255, 0, 157);
 }

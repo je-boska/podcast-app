@@ -10,12 +10,12 @@
   align-items: center;
 }
 
-.bar__time {
+.time {
   color: black;
   font-size: 12px;
 }
 
-.bar__progress {
+.progress {
   flex: 1;
   margin: 0 20px;
   height: 3px;
@@ -25,7 +25,7 @@
   transition: 0.15s opacity linear;
 }
 
-.bar__progress__knob {
+.knob {
   position: relative;
   height: 16px;
   width: 16px;
@@ -34,6 +34,6 @@
   background-color: black;
 }
 
-.bar__progress:hover {
-  opacity: 0.7;
+.progress:hover {
+  opacity: 0.6;
 }

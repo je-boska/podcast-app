@@ -8,12 +8,3 @@
 body::-webkit-scrollbar {
   display: none;
 }
-
-button {
-  border: none;
-  background-color: white;
-  color: black;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 50%;
-}
