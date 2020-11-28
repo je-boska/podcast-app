@@ -29,12 +29,8 @@ export default function Bar({ playing, trackId }) {
 
     const audio = document.getElementById('audio')
     let podcastTimes = JSON.parse(localStorage.getItem('podcast-time'))
-    if (!podcastTimes || typeof podcastTimes !== 'object') {
-      podcastTimes = {}
-    }
-
-    if (trackId in podcastTimes) {
-      audio.currentTime = podcastTimes[trackId]
+    if (podcastTimes && trackId in podcastTimes) {
+      audio.currentTime = podcastTimes[trackId].time
     }
     // eslint-disable-next-line
   }, [])
@@ -42,6 +38,9 @@ export default function Bar({ playing, trackId }) {
   useEffect(() => {
     const audio = document.getElementById('audio')
     let podcastTimes = JSON.parse(localStorage.getItem('podcast-time'))
+    if (!podcastTimes || typeof podcastTimes !== 'object') {
+      podcastTimes = {}
+    }
 
     // state setters wrappers
     const setAudioData = () => {
@@ -51,7 +50,7 @@ export default function Bar({ playing, trackId }) {
     }
 
     const setAudioTime = () => {
-      podcastTimes[trackId] = audio.currentTime
+      podcastTimes[trackId] = { time: audio.currentTime, duration: duration }
       localStorage.setItem('podcast-time', JSON.stringify(podcastTimes))
       setCurTime(audio.currentTime)
     }
