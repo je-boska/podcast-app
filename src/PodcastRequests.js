@@ -1,17 +1,11 @@
 import axios from 'axios'
 
 export async function searchPodcasts(searchTerm) {
-  const searchString = `search?entity=podcast&term=${searchTerm}&limit=10`
-  const {
-    data: { results },
-  } = await axios.get(`https://itunes.apple.com/${searchString}`)
-  return results
+  const { data } = await axios.get(`/api/search/${searchTerm}`)
+  return data
 }
 
 export async function lookupEpisodes(id) {
-  const lookupString = `lookup?id=${id}&media=podcast&entity=podcastEpisode&limit=50`
-  const {
-    data: { results },
-  } = await axios.get(`https://itunes.apple.com/${lookupString}`)
-  return results
+  const { data } = await axios.get(`/api/lookup/${id}`)
+  return data
 }
