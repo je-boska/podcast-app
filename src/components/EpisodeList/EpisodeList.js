@@ -1,14 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './EpisodeList.css'
 import { Link } from 'react-router-dom'
 import EpisodeListItem from '../EpisodeListItem/EpisodeListItem'
-import { selectEpisodes, selectLoading } from '../../slices/podcastSlice'
-import { useSelector } from 'react-redux'
+import { selectEpisodes, selectLoading, selectPodcast, setEpisodes, setLoading } from '../../slices/podcastSlice'
+import { useSelector, useDispatch } from 'react-redux'
 import Loader from '../Loader/Loader'
+import { lookupEpisodes } from '../../PodcastRequests'
 
 const EpisodeList = () => {
+  const dispatch = useDispatch()
+  const podcast = useSelector(selectPodcast)
   const episodes = useSelector(selectEpisodes)
   const loading = useSelector(selectLoading)
+
+  useEffect(() => {
+    if (podcast.collectionId) {
+      loadEpisodes(podcast.collectionId)
+    } else {
+      const localPodcast = JSON.parse(localStorage.getItem('current-podcast'))
+      loadEpisodes(localPodcast.collectionId)
+    }
+    // eslint-disable-next-line
+  }, [])
+
+  const loadEpisodes = async (collectionId) => {
+    dispatch(setLoading(true))
+    const episodes = await lookupEpisodes(collectionId)
+    dispatch(setEpisodes(episodes.slice(1)))
+    dispatch(setLoading(false))
+  }
 
   return (
     <>

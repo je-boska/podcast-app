@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { setEpisodes, setLoading } from '../../slices/podcastSlice'
 import {
   addSubscription,
   removeSubscription,
   selectSubscriptions,
 } from '../../slices/subscriptionsSlice'
-import { lookupEpisodes } from '../../PodcastRequests'
 import './PodcastListItem.css'
+import { setPodcast } from '../../slices/podcastSlice'
 
 const PodcastListItem = ({ podcast }) => {
   const {
@@ -36,11 +35,9 @@ const PodcastListItem = ({ podcast }) => {
     }
   }
 
-  const selectPodcastHandler = async () => {
-    dispatch(setLoading(true))
-    const episodes = await lookupEpisodes(collectionId)
-    dispatch(setEpisodes(episodes.slice(1)))
-    dispatch(setLoading(false))
+  const selectPodcastHandler = () => {
+    dispatch(setPodcast(podcast))
+    localStorage.setItem("current-podcast", JSON.stringify(podcast))
   }
 
   const subscribeHandler = () => {
@@ -77,8 +74,7 @@ const PodcastListItem = ({ podcast }) => {
           textDecoration: 'none',
           display: 'flex',
           alignItems: 'center',
-        }}
-        onClick={selectPodcastHandler}>
+        }} onClick={selectPodcastHandler}>
         <img src={artworkUrl100} alt={collectionName} />
         <div className='podcast-list-item-text'>
           <h4>{collectionName}</h4>

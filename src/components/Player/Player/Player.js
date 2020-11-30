@@ -1,13 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  selectCurrentEpisode,
-  setCurrentEpisode,
-  setEpisodes,
-  setLoading,
-} from '../../../slices/podcastSlice'
-import { lookupEpisodes } from '../../../PodcastRequests'
+import { selectCurrentEpisode, setCurrentEpisode} from '../../../slices/podcastSlice'
 import './Player.css'
 
 import useAudioPlayer from '../useAudioPlayer'
@@ -23,7 +17,6 @@ const Player = () => {
     trackName,
     artworkUrl600,
     episodeUrl,
-    collectionId,
     trackId,
   } = episode
 
@@ -35,16 +28,9 @@ const Player = () => {
     // eslint-disable-next-line
   }, [])
 
-  const loadEpisodesHandler = async () => {
-    dispatch(setLoading(true))
-    const episodes = await lookupEpisodes(collectionId)
-    dispatch(setEpisodes(episodes.slice(1)))
-    dispatch(setLoading(false))
-  }
-
   return (
     <>
-      <Link to={`/episode-list`} onClick={loadEpisodesHandler}>
+      <Link to={`/episode-list`}>
         <i
           className='fas fa-arrow-left'
           style={{
