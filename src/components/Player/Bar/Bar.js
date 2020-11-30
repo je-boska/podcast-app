@@ -9,14 +9,14 @@ import { selectLoading, setLoading } from '../../../slices/podcastSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../Loader/Loader'
 
-export default function Bar({ playing, trackId }) {
+export default function Bar({ playing, setPlaying, trackId }) {
   const {
     values,
     setDuration,
     setCurTime,
     setClickedTime,
     setSeeking,
-    setSeekTime,
+    setSeekTime
   } = useAudioPlayer()
 
   const { duration, curTime, clickedTime, seekTime, seeking } = values
@@ -53,6 +53,7 @@ export default function Bar({ playing, trackId }) {
       podcastTimes[trackId] = { time: audio.currentTime, duration: duration }
       localStorage.setItem('podcast-time', JSON.stringify(podcastTimes))
       setCurTime(audio.currentTime)
+      curTime === duration && setPlaying(false)
     }
 
     // DOM listeners: update React state on DOM events
@@ -64,7 +65,7 @@ export default function Bar({ playing, trackId }) {
       setClickedTime(null)
     }
 
-    playing ? audio.play() : audio.pause()
+    playing && curTime < duration ? audio.play() : audio.pause()
 
     // effect cleanup
     return () => {

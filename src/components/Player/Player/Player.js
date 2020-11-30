@@ -52,7 +52,7 @@ const Player = () => {
           No audio
         </audio>
         <Play playing={playing} setPlaying={setPlaying} />
-        <Bar playing={playing} trackId={trackId} />
+        <Bar playing={playing} trackId={trackId} setPlaying={setPlaying} />
       </div>
     </>
   )
