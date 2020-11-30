@@ -18,6 +18,7 @@ const PodcastListItem = ({ podcast }) => {
   } = podcast
 
   const [subscribed, setSubscribed] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const dispatch = useDispatch()
   const subscriptions = useSelector(selectSubscriptions)
@@ -33,6 +34,7 @@ const PodcastListItem = ({ podcast }) => {
         setSubscribed(true)
       }
     }
+    setLoading(false)
   }
 
   const selectPodcastHandler = () => {
@@ -81,7 +83,7 @@ const PodcastListItem = ({ podcast }) => {
           <p>{primaryGenreName}</p>
         </div>
       </Link>
-      {subscribed ? (
+      {loading ? null : subscribed ? (
         <button className='button unsubscribe' onClick={subscribeHandler}>
           <i className='fas fa-minus'></i>
         </button>
