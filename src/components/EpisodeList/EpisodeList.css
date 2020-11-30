@@ -22,9 +22,20 @@
   max-width: 100%;
 }
 
-.episode-list-title {
+.episode-list-info {
+  margin: 20px 0px;
+  text-align: left;
+}
+
+.episode-list-info p {
   font-weight: 100;
-  margin: 20px;
+}
+
+.episode-list-info-and-sub {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media only screen and (min-width: 1000px) {

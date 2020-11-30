@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import {
-  addSubscription,
-  removeSubscription,
-  selectSubscriptions,
-} from '../../slices/subscriptionsSlice'
+import { useDispatch } from 'react-redux'
 import './PodcastListItem.css'
 import { setPodcast } from '../../slices/podcastSlice'
+import SubscribeButton from '../../components/SubscribeButton/SubscribeButton'
 
 const PodcastListItem = ({ podcast }) => {
   const {
@@ -17,55 +13,11 @@ const PodcastListItem = ({ podcast }) => {
     primaryGenreName,
   } = podcast
 
-  const [subscribed, setSubscribed] = useState(false)
-  const [loading, setLoading] = useState(true)
-
   const dispatch = useDispatch()
-  const subscriptions = useSelector(selectSubscriptions)
-
-  useEffect(() => {
-    checkIfSubscribed()
-    // eslint-disable-next-line
-  }, [])
-
-  const checkIfSubscribed = () => {
-    for (let i = 0; i < subscriptions.length; i++) {
-      if (collectionId === subscriptions[i].collectionId) {
-        setSubscribed(true)
-      }
-    }
-    setLoading(false)
-  }
 
   const selectPodcastHandler = () => {
     dispatch(setPodcast(podcast))
     localStorage.setItem("current-podcast", JSON.stringify(podcast))
-  }
-
-  const subscribeHandler = () => {
-    const localSubs = JSON.parse(localStorage.getItem('subscriptions'))
-    if (subscribed || podcast.subscribed) {
-      dispatch(removeSubscription(podcast))
-      setSubscribed(false)
-      const newSubs = localSubs.filter(sub => sub.collectionId !== collectionId)
-      localStorage.setItem('subscriptions', JSON.stringify(newSubs))
-    } else {
-      const subscribedPodcast = {
-        ...podcast,
-        subscribed: true,
-      }
-      dispatch(addSubscription(subscribedPodcast))
-      setSubscribed(true)
-      if (localSubs) {
-        const newSubs = localSubs.concat(subscribedPodcast)
-        localStorage.setItem('subscriptions', JSON.stringify(newSubs))
-      } else {
-        localStorage.setItem(
-          'subscriptions',
-          JSON.stringify([subscribedPodcast])
-        )
-      }
-    }
   }
 
   return (
@@ -83,15 +35,7 @@ const PodcastListItem = ({ podcast }) => {
           <p>{primaryGenreName}</p>
         </div>
       </Link>
-      {loading ? null : subscribed ? (
-        <button className='button unsubscribe' onClick={subscribeHandler}>
-          <i className='fas fa-minus'></i>
-        </button>
-      ) : (
-        <button className='button subscribe' onClick={subscribeHandler}>
-          <i className='fas fa-plus'></i>
-        </button>
-      )}
+      <SubscribeButton podcast={podcast} />
     </div>
   )
 }

@@ -2,10 +2,11 @@ import React, { useEffect } from 'react'
 import './EpisodeList.css'
 import { Link } from 'react-router-dom'
 import EpisodeListItem from '../EpisodeListItem/EpisodeListItem'
-import { selectEpisodes, selectLoading, selectPodcast, setEpisodes, setLoading } from '../../slices/podcastSlice'
+import { selectEpisodes, selectLoading, selectPodcast, setEpisodes, setLoading, setPodcast } from '../../slices/podcastSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import Loader from '../Loader/Loader'
 import { lookupEpisodes } from '../../PodcastRequests'
+import SubscribeButton from '../SubscribeButton/SubscribeButton'
 
 const EpisodeList = () => {
   const dispatch = useDispatch()
@@ -13,11 +14,14 @@ const EpisodeList = () => {
   const episodes = useSelector(selectEpisodes)
   const loading = useSelector(selectLoading)
 
+  const { collectionName, artworkUrl600, primaryGenreName, artistName } = podcast
+
   useEffect(() => {
     if (podcast.collectionId) {
       loadEpisodes(podcast.collectionId)
     } else {
       const localPodcast = JSON.parse(localStorage.getItem('current-podcast'))
+      dispatch(setPodcast(localPodcast))
       loadEpisodes(localPodcast.collectionId)
     }
     // eslint-disable-next-line
@@ -51,10 +55,17 @@ const EpisodeList = () => {
         ) : (
           <div className='episode-list-hero'>
             <img
-              src={episodes[0].artworkUrl600}
-              alt={episodes[0].collectionName}
+              src={artworkUrl600}
+              alt={collectionName}
             />
-            <h3 className='episode-list-title'>{episodes[0].collectionName}</h3>
+            <div className='episode-list-info-and-sub'>
+              <div className='episode-list-info'>
+                <h3>{collectionName}</h3>
+                <p>{artistName}</p>
+                <p>{primaryGenreName}</p>
+              </div>
+              <SubscribeButton podcast={podcast} />
+            </div>
           </div>
         )}
 
