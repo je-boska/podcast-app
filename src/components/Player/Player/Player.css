@@ -12,6 +12,15 @@
   z-index: -1;
 }
 
+.player-image {
+  position: absolute;
+  width: 100%;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: 0.4s all ease-in-out;
+}
+
 .gradient-overlay {
   mask-image: linear-gradient(to top, transparent 15%, black 85%);
 }
@@ -36,4 +45,27 @@
 
 .play-pause-button:hover {
   opacity: 0.7;
+}
+
+.dimmed {
+  opacity: 0.3;
+}
+
+.description {
+  margin: 100px auto;
+  max-width: 400px;
+}
+
+.description * {
+  margin: 10px 0px;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+@media only screen and (min-width: 1000px) {
+  .description {
+    margin: 40% auto;
+  }
 }

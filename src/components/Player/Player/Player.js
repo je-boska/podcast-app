@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentEpisode, setCurrentEpisode} from '../../../slices/podcastSlice'
@@ -9,24 +9,37 @@ import Bar from '../Bar/Bar'
 import Play from '../Play/Play'
 
 const Player = () => {
+  const [ viewDescription, setViewDescription ] = useState(false)
+
   const { values, setPlaying } = useAudioPlayer()
   const { playing } = values
 
   const episode = useSelector(selectCurrentEpisode)
   const {
+    collectionName,
     trackName,
+    releaseDate,
     artworkUrl600,
     episodeUrl,
     trackId,
+    description
   } = episode
+
+  const formattedDate = releaseDate ? releaseDate.slice(0, 9) : null
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     const localEpisode = JSON.parse(localStorage.getItem('current-episode'))
-    dispatch(setCurrentEpisode(localEpisode))
+    if (!episode.collectionName && localEpisode) {
+      dispatch(setCurrentEpisode(localEpisode))
+    } 
     // eslint-disable-next-line
   }, [])
+
+  const viewDescriptionHandler = () => {
+    viewDescription ? setViewDescription(false) : setViewDescription(true)
+  }
 
   return (
     <>
@@ -44,7 +57,14 @@ const Player = () => {
         />
       </Link>
       <div className='player'>
-        <div className='player-image gradient-overlay'>
+        <div className={`${!viewDescription && 'hidden'}`}>
+          <div className="description">
+            <h4>{collectionName}</h4>
+            <p>{formattedDate}</p>
+            <p>{description}</p>
+          </div>
+        </div>
+        <div className={`player-image gradient-overlay ${viewDescription && 'dimmed'}`} onClick={viewDescriptionHandler}>
           <img src={artworkUrl600} alt={trackName} />
         </div>
         <h3 className='title'>{trackName}</h3>

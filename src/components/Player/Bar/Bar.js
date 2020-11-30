@@ -23,18 +23,11 @@ export default function Bar({ playing, setPlaying, trackId }) {
 
   const dispatch = useDispatch()
   const loading = useSelector(selectLoading)
-
+  
   useEffect(() => {
     dispatch(setLoading(true))
-
-    const audio = document.getElementById('audio')
-    let podcastTimes = JSON.parse(localStorage.getItem('podcast-time'))
-    if (podcastTimes && trackId in podcastTimes) {
-      audio.currentTime = podcastTimes[trackId].time
-    }
-    // eslint-disable-next-line
-  }, [])
-
+  }, [dispatch])
+  
   useEffect(() => {
     const audio = document.getElementById('audio')
     let podcastTimes = JSON.parse(localStorage.getItem('podcast-time'))
@@ -42,11 +35,14 @@ export default function Bar({ playing, setPlaying, trackId }) {
       podcastTimes = {}
     }
 
-    // state setters wrappers
     const setAudioData = () => {
-      dispatch(setLoading(false))
       setDuration(audio.duration)
-      setCurTime(audio.currentTime)
+      let podcastTimes = JSON.parse(localStorage.getItem('podcast-time'))
+      if (podcastTimes && trackId in podcastTimes) {
+        audio.currentTime = podcastTimes[trackId].time
+        setCurTime(audio.currentTime)
+      }
+      dispatch(setLoading(false))
     }
 
     const setAudioTime = () => {
@@ -56,7 +52,6 @@ export default function Bar({ playing, setPlaying, trackId }) {
       curTime === duration && setPlaying(false)
     }
 
-    // DOM listeners: update React state on DOM events
     audio.addEventListener('loadeddata', setAudioData)
     audio.addEventListener('timeupdate', setAudioTime)
 
@@ -67,7 +62,6 @@ export default function Bar({ playing, setPlaying, trackId }) {
 
     playing && curTime < duration ? audio.play() : audio.pause()
 
-    // effect cleanup
     return () => {
       audio.removeEventListener('loadeddata', setAudioData)
       audio.removeEventListener('timeupdate', setAudioTime)
