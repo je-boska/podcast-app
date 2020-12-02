@@ -9,7 +9,13 @@ import { selectLoading, setLoading } from '../../../slices/podcastSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../Loader/Loader'
 
-export default function Bar({ playing, setPlaying, trackId }) {
+export default function Bar({
+  playing,
+  setPlaying,
+  trackId,
+  header,
+  loaderColor,
+}) {
   const {
     values,
     setDuration,
@@ -77,7 +83,7 @@ export default function Bar({ playing, setPlaying, trackId }) {
   }
 
   function calcMouseTime(e) {
-    const clickPositionInPage = e.pageX || e.targetTouches[0].pageX
+    const clickPositionInPage = e.pageX
     const bar = document.querySelector('.progress')
     const barStart = bar.getBoundingClientRect().left + window.scrollX
     const barWidth = bar.offsetWidth
@@ -96,14 +102,9 @@ export default function Bar({ playing, setPlaying, trackId }) {
     }
 
     document.addEventListener('mousemove', updateTimeOnMove)
-    document.addEventListener('touchmove', updateTimeOnMove)
 
     document.addEventListener('mouseup', () => {
       document.removeEventListener('mousemove', updateTimeOnMove)
-      setSeeking(false)
-    })
-    document.addEventListener('touchend', () => {
-      document.removeEventListener('touchmove', updateTimeOnMove)
       setSeeking(false)
     })
   }
@@ -111,17 +112,18 @@ export default function Bar({ playing, setPlaying, trackId }) {
   return (
     <div className='bar'>
       {loading ? (
-        <Loader />
+        <Loader color={loaderColor} />
       ) : (
         <>
           <span className='time'>{formatDuration(curTime)}</span>
           <div
             className='progress'
             style={{
-              background: `linear-gradient(to right, black ${curPercentage}%, lightGrey 0)`,
+              background: `linear-gradient(to right, ${
+                header ? 'white' : 'black'
+              } ${curPercentage}%, ${header ? 'darkGrey' : 'lightGrey'} 0)`,
             }}
             onMouseDown={e => handleTimeDrag(e)}
-            onTouchStart={e => handleTimeDrag(e)}
           >
             <span
               className='knob'
@@ -129,10 +131,13 @@ export default function Bar({ playing, setPlaying, trackId }) {
                 left: `${
                   curPercentage > 0 && curPercentage < 100 && curPercentage - 2
                 }%`,
+                backgroundColor: header ? 'white' : 'black',
               }}
             />
           </div>
-          <span className='time'>{formatDuration(duration)}</span>
+          <span className='time' style={{ color: header ? 'white' : 'black' }}>
+            {formatDuration(duration)}
+          </span>
         </>
       )}
     </div>

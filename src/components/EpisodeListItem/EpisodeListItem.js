@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { setCurrentEpisode } from '../../slices/podcastSlice'
 import './EpisodeListItem.css'
 
@@ -26,24 +25,20 @@ const EpisodeListItem = ({ episode }) => {
   }
 
   return (
-    <Link
-      to={`/player`}
-      style={{ textDecoration: 'none', color: 'black' }}
-      onClick={selectEpisodeHandler}>
-      <div className='episode-list-item'>
-        <img src={artworkUrl160} alt={trackName} />
-        <div className='episode-list-item-text'>
-          <h4>{trackName}</h4>
-          <p>{releaseDate.slice(0, 10)}</p>
-          <div
-            className='played-percentage-bar'
-            style={{
-              background: `linear-gradient(to right, orange ${playedPercentage}%, lightGrey 0)`,
-            }}></div>
-          <p style={{ color: 'green' }}>{playedPercentage > 90 && 'Played'}</p>
-        </div>
+    <div className='episode-list-item' onClick={selectEpisodeHandler}>
+      <img src={artworkUrl160} alt={trackName} />
+      <div className='episode-list-item-text'>
+        <h4>{trackName}</h4>
+        <p>{releaseDate.slice(0, 10)}</p>
+        <p style={{ color: 'green' }}>{playedPercentage > 90 && 'Played'}</p>
+        <div
+          className='played-percentage-bar'
+          style={{
+            background: `linear-gradient(to right, orange ${playedPercentage}%, lightGrey 0)`,
+          }}
+        ></div>
       </div>
-    </Link>
+    </div>
   )
 }
 

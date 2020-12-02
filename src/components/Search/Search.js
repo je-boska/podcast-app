@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Search.css'
 import { searchPodcasts } from '../../PodcastRequests'
 import { useSelector, useDispatch } from 'react-redux'
@@ -16,6 +16,8 @@ import PodcastListItem from '../PodcastListItem/PodcastListItem'
 import { setSubscriptions } from '../../slices/subscriptionsSlice'
 
 const Search = () => {
+  const [searching, setSearching] = useState(false)
+
   const dispatch = useDispatch()
   const loading = useSelector(selectLoading)
   const searchTerm = useSelector(selectSearchTerm)
@@ -30,10 +32,12 @@ const Search = () => {
   }, [])
 
   const getSearchResults = async () => {
-    dispatch(setLoading(true))
-    const newResults = await searchPodcasts(searchTerm)
-    dispatch(setSearchResults(newResults))
-    dispatch(setLoading(false))
+    if (searchTerm.length > 0) {
+      dispatch(setLoading(true))
+      const newResults = await searchPodcasts(searchTerm)
+      dispatch(setSearchResults(newResults))
+      dispatch(setLoading(false))
+    }
   }
 
   const submitHandler = e => {
@@ -43,22 +47,47 @@ const Search = () => {
 
   return (
     <div className='search-container'>
-      <form onSubmit={e => submitHandler(e)} className='search-bar'>
-        <input
-          placeholder='Search'
-          value={searchTerm}
-          onChange={e => dispatch(setSearchTerm(e.target.value))}
-        />
-      </form>
-      <div className='podcast-list'>
-        {loading ? (
-          <Loader />
+      <div
+        className='search-icon'
+        onClick={() => {
+          setSearching(!searching)
+          if (searching) {
+            dispatch(setSearchTerm(''))
+            dispatch(setSearchResults([]))
+          }
+        }}
+      >
+        {searching ? (
+          <i className='fas fa-times' style={{ opacity: '0.5' }} />
         ) : (
-          results.map(podcast => (
-            <PodcastListItem key={podcast.collectionId} podcast={podcast} />
-          ))
+          <i className='fas fa-search' />
         )}
       </div>
+      {!searching ? null : (
+        <div>
+          <form onSubmit={e => submitHandler(e)} className='search-bar'>
+            <input
+              placeholder='Search'
+              value={searchTerm}
+              onChange={e => dispatch(setSearchTerm(e.target.value))}
+            />
+          </form>
+          <div
+            className='podcast-list'
+            style={{
+              margin: `${results.length < 1 ? '0px auto' : '105px auto'}`,
+            }}
+          >
+            {loading ? (
+              <Loader />
+            ) : (
+              results.map(podcast => (
+                <PodcastListItem key={podcast.collectionId} podcast={podcast} />
+              ))
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

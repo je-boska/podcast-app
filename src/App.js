@@ -10,12 +10,11 @@ import EpisodeList from './components/EpisodeList/EpisodeList'
 function App() {
   return (
     <div className='App'>
+      <Player />
       <Router>
-        <Header />
         <Route path='/' component={Search} exact />
         <Route path='/search' component={Search} />
-        <Route path='/subscriptions' component={SubscriptionsList} />
-        <Route path='/player' component={Player} />
+        <Route path='/' component={SubscriptionsList} exact />
         <Route path='/episode-list' component={EpisodeList} />
       </Router>
     </div>

@@ -17,7 +17,7 @@ const PodcastListItem = ({ podcast }) => {
 
   const selectPodcastHandler = () => {
     dispatch(setPodcast(podcast))
-    localStorage.setItem("current-podcast", JSON.stringify(podcast))
+    localStorage.setItem('current-podcast', JSON.stringify(podcast))
   }
 
   return (
@@ -28,7 +28,9 @@ const PodcastListItem = ({ podcast }) => {
           textDecoration: 'none',
           display: 'flex',
           alignItems: 'center',
-        }} onClick={selectPodcastHandler}>
+        }}
+        onClick={selectPodcastHandler}
+      >
         <img src={artworkUrl100} alt={collectionName} />
         <div className='podcast-list-item-text'>
           <h4>{collectionName}</h4>

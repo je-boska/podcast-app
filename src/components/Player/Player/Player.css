@@ -1,9 +1,18 @@
 .player {
-  margin-top: 50px;
+  opacity: 1;
+  z-index: 2;
+  background-color: white;
   width: 100%;
-  height: 90%;
+  height: 100vh;
   background-position: center;
   text-align: center;
+  position: fixed;
+  top: -100vh;
+  transition: 0.35s all ease-in-out;
+}
+
+.visible {
+  transform: translateY(100vh);
 }
 
 .player img {
@@ -15,7 +24,7 @@
 .player-image {
   position: absolute;
   width: 100%;
-  top: 50px;
+  top: 0px;
   left: 50%;
   transform: translateX(-50%);
   transition: 0.4s all ease-in-out;
@@ -28,23 +37,86 @@
 .player .title {
   width: 90%;
   position: absolute;
-  top: 65%;
+  top: 65vh;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0.9;
 }
 
-.play-pause-button {
-  cursor: pointer;
+.play-container {
   position: absolute;
-  top: 75%;
+  top: 75vh;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.bar-container {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 85vh;
+}
+
+.play-pause-button {
+  cursor: pointer;
   transition: 0.15s opacity linear;
 }
 
 .play-pause-button:hover {
   opacity: 0.7;
+}
+
+.player-header {
+  position: absolute;
+  top: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  color: white;
+  background-color: black;
+  height: 50px;
+  width: 100%;
+}
+
+.header-play-button {
+  margin-right: 20px;
+  font-size: 14px;
+}
+
+.header-bar-container {
+  display: none;
+  width: 100%;
+  padding: 0px 20px;
+}
+
+.up-arrow,
+.down-arrow {
+  cursor: pointer;
+  transition: 0.15s opacity linear;
+}
+
+.up-arrow:hover,
+.down-arrow:hover {
+  opacity: 0.7;
+}
+
+.down-arrow {
+  margin-left: 20px;
+}
+
+.up-arrow {
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  right: 15px;
+  top: 15px;
 }
 
 .dimmed {
@@ -64,8 +136,17 @@
   opacity: 0;
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 565px) {
   .description {
-    margin: 40% auto;
+    margin: 20% auto;
+  }
+
+  .header-bar-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .header-track-name {
+    width: 40%;
   }
 }

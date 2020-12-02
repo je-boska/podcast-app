@@ -9,10 +9,11 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .episode-list-item-text {
-  margin: 20px;
+  margin: 10px;
   opacity: 0.9;
 }
 
@@ -28,6 +29,13 @@
 }
 
 .played-percentage-bar {
-  width: 100%;
+  width: 200px;
   height: 5px;
+  transform: translateY(-100%);
+}
+
+@media only screen and (min-width: 1000px) {
+  .played-percentage-bar {
+    width: 400px;
+  }
 }

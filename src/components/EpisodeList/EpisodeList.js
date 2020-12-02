@@ -2,7 +2,14 @@ import React, { useEffect } from 'react'
 import './EpisodeList.css'
 import { Link } from 'react-router-dom'
 import EpisodeListItem from '../EpisodeListItem/EpisodeListItem'
-import { selectEpisodes, selectLoading, selectPodcast, setEpisodes, setLoading, setPodcast } from '../../slices/podcastSlice'
+import {
+  selectEpisodes,
+  selectLoading,
+  selectPodcast,
+  setEpisodes,
+  setLoading,
+  setPodcast,
+} from '../../slices/podcastSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import Loader from '../Loader/Loader'
 import { lookupEpisodes } from '../../PodcastRequests'
@@ -14,7 +21,12 @@ const EpisodeList = () => {
   const episodes = useSelector(selectEpisodes)
   const loading = useSelector(selectLoading)
 
-  const { collectionName, artworkUrl600, primaryGenreName, artistName } = podcast
+  const {
+    collectionName,
+    artworkUrl600,
+    primaryGenreName,
+    artistName,
+  } = podcast
 
   useEffect(() => {
     if (podcast.collectionId) {
@@ -27,7 +39,7 @@ const EpisodeList = () => {
     // eslint-disable-next-line
   }, [])
 
-  const loadEpisodes = async (collectionId) => {
+  const loadEpisodes = async collectionId => {
     dispatch(setLoading(true))
     const episodes = await lookupEpisodes(collectionId)
     dispatch(setEpisodes(episodes.slice(1)))
@@ -36,16 +48,15 @@ const EpisodeList = () => {
 
   return (
     <>
-      <Link to='/search'>
+      <Link to='/'>
         <i
-          className='fas fa-arrow-left'
+          className='fas fa-chevron-left'
           style={{
             position: 'fixed',
             zIndex: '1',
-            top: '15px',
+            top: '70px',
             left: '20px',
-            color: 'white',
-            backgroundColor: 'black',
+            fontSize: '25px',
           }}
         />
       </Link>
@@ -54,10 +65,7 @@ const EpisodeList = () => {
           <Loader />
         ) : (
           <div className='episode-list-hero'>
-            <img
-              src={artworkUrl600}
-              alt={collectionName}
-            />
+            <img src={artworkUrl600} alt={collectionName} />
             <div className='episode-list-info-and-sub'>
               <div className='episode-list-info'>
                 <h3>{collectionName}</h3>

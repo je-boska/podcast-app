@@ -1,17 +1,12 @@
 .bar {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 85%;
   user-select: none;
-  width: 90%;
+  width: 100%;
   max-width: 800px;
   display: flex;
   align-items: center;
 }
 
 .time {
-  color: black;
   font-size: 12px;
 }
 
@@ -31,7 +26,6 @@
   width: 16px;
   border: 1.5px solid black;
   border-radius: 50%;
-  background-color: black;
 }
 
 .progress:hover {
