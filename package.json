@@ -1,5 +1,6 @@
 {
   "name": "podcast-app",
+  "proxy": "http://127.0.0.1:5000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,6 +9,7 @@
     "@testing-library/react": "^11.2.1",
     "@testing-library/user-event": "^12.2.2",
     "axios": "^0.21.0",
+    "concurrently": "^5.3.0",
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
@@ -24,7 +26,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "nodemon server/server.js"
+    "server": "nodemon server/server.js",
+    "client": "react-scripts start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "eslintConfig": {
     "extends": [

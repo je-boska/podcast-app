@@ -16,18 +16,18 @@ export default function Bar({ playing, setPlaying, trackId }) {
     setCurTime,
     setClickedTime,
     setSeeking,
-    setSeekTime
+    setSeekTime,
   } = useAudioPlayer()
 
   const { duration, curTime, clickedTime, seekTime, seeking } = values
 
   const dispatch = useDispatch()
   const loading = useSelector(selectLoading)
-  
+
   useEffect(() => {
     dispatch(setLoading(true))
   }, [dispatch])
-  
+
   useEffect(() => {
     const audio = document.getElementById('audio')
     let podcastTimes = JSON.parse(localStorage.getItem('podcast-time'))
@@ -77,7 +77,7 @@ export default function Bar({ playing, setPlaying, trackId }) {
   }
 
   function calcMouseTime(e) {
-    const clickPositionInPage = e.pageX
+    const clickPositionInPage = e.pageX || e.targetTouches[0].pageX
     const bar = document.querySelector('.progress')
     const barStart = bar.getBoundingClientRect().left + window.scrollX
     const barWidth = bar.offsetWidth
@@ -96,9 +96,14 @@ export default function Bar({ playing, setPlaying, trackId }) {
     }
 
     document.addEventListener('mousemove', updateTimeOnMove)
+    document.addEventListener('touchmove', updateTimeOnMove)
 
     document.addEventListener('mouseup', () => {
       document.removeEventListener('mousemove', updateTimeOnMove)
+      setSeeking(false)
+    })
+    document.addEventListener('touchend', () => {
+      document.removeEventListener('touchmove', updateTimeOnMove)
       setSeeking(false)
     })
   }
@@ -115,7 +120,9 @@ export default function Bar({ playing, setPlaying, trackId }) {
             style={{
               background: `linear-gradient(to right, black ${curPercentage}%, lightGrey 0)`,
             }}
-            onMouseDown={e => handleTimeDrag(e)}>
+            onMouseDown={e => handleTimeDrag(e)}
+            onTouchStart={e => handleTimeDrag(e)}
+          >
             <span
               className='knob'
               style={{
