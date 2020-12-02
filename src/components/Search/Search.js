@@ -57,11 +57,13 @@ const Search = () => {
           }
         }}
       >
-        {searching ? (
-          <i className='fas fa-times' style={{ opacity: '0.5' }} />
-        ) : (
-          <i className='fas fa-search' />
-        )}
+        <div className='search-icon-container'>
+          {searching ? (
+            <i className='fas fa-times' style={{ opacity: '0.5' }} />
+          ) : (
+            <i className='fas fa-search' />
+          )}
+        </div>
       </div>
       {!searching ? null : (
         <div>
