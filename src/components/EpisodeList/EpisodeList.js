@@ -49,17 +49,9 @@ const EpisodeList = () => {
   return (
     <>
       <Link to='/'>
-        <i
-          className='fas fa-chevron-left'
-          style={{
-            position: 'fixed',
-            zIndex: '1',
-            top: '70px',
-            left: '20px',
-            fontSize: '25px',
-            color: 'black',
-          }}
-        />
+        <div className='back-arrow'>
+          <i className='fas fa-chevron-left' />
+        </div>
       </Link>
       <div className='episode-list-container'>
         {loading || episodes.length < 1 ? (
