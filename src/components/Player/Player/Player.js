@@ -72,34 +72,44 @@ const Player = () => {
         >
           <img src={artworkUrl600} alt={trackName} />
         </div>
-        <h3 className='title'>{trackName}</h3>
+        <h3 className='title'>
+          {trackName ? trackName : 'No current episode'}
+        </h3>
         <audio id='audio' src={episodeUrl}>
           No audio
         </audio>
         <div className='play-container'>
           <Play playing={playing} setPlaying={setPlaying} />
         </div>
-        <div className='bar-container'>
-          <Bar playing={playing} trackId={trackId} setPlaying={setPlaying} />
-        </div>
+        {trackName && (
+          <div className='bar-container'>
+            <Bar playing={playing} trackId={trackId} setPlaying={setPlaying} />
+          </div>
+        )}
         <div className='player-header'>
           <div className='player-header-items'>
-            <div className='header-play-button'>
-              {loading ? (
-                <Loader color='white' />
-              ) : (
-                <Play playing={playing} setPlaying={setPlaying} />
-              )}
-            </div>
-            <div className='header-bar-container'>
-              <Bar
-                playing={playing}
-                trackId={trackId}
-                setPlaying={setPlaying}
-                header={true}
-              />
-            </div>
-            <p className='header-track-name'>{trackName}</p>
+            {trackName && (
+              <div className='header-play-button'>
+                {loading ? (
+                  <Loader color='white' />
+                ) : (
+                  <Play playing={playing} setPlaying={setPlaying} />
+                )}
+              </div>
+            )}
+            {trackName && (
+              <div className='header-bar-container'>
+                <Bar
+                  playing={playing}
+                  trackId={trackId}
+                  setPlaying={setPlaying}
+                  header={true}
+                />
+              </div>
+            )}
+            <p className='header-track-name'>
+              {trackName ? trackName : 'No current episode'}
+            </p>
             <h2
               className='down-arrow'
               onClick={() => dispatch(setViewPlayer(!viewPlayer))}

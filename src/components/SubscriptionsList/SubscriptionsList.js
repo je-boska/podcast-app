@@ -23,9 +23,14 @@ const SubscriptionsList = () => {
   return (
     <div className='subscriptions-container'>
       <h3 className='subscriptions-title'>
-        {subscriptions.length < 1
-          ? 'No subscriptions yet - click the search icon to find podcasts'
-          : 'Subscriptions'}
+        {subscriptions.length < 1 ? (
+          <p style={{ marginTop: '50%' }}>
+            Not subscribed to any podcasts <br /> - <br /> Click the search icon
+            to find something to subscribe to
+          </p>
+        ) : (
+          'Subscriptions'
+        )}
       </h3>
       <div className='subscriptions-list'>
         {subscriptions.map(podcast => (

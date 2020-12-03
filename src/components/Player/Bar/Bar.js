@@ -38,7 +38,6 @@ export default function Bar({ playing, setPlaying, trackId, header }) {
 
     const setAudioData = () => {
       setDuration(audio.duration)
-      console.log('set audio data')
       if (podcastTimes && trackId in podcastTimes) {
         audio.currentTime = podcastTimes[trackId].time
         setCurTime(audio.currentTime)
