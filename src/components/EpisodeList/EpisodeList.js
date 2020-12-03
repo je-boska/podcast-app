@@ -57,6 +57,7 @@ const EpisodeList = () => {
             top: '70px',
             left: '20px',
             fontSize: '25px',
+            color: 'black',
           }}
         />
       </Link>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setCurrentEpisode } from '../../slices/podcastSlice'
+import { setLoading } from '../../slices/playerSlice'
 import './EpisodeListItem.css'
 
 const EpisodeListItem = ({ episode }) => {
@@ -20,8 +21,20 @@ const EpisodeListItem = ({ episode }) => {
   }, [])
 
   const selectEpisodeHandler = () => {
+    dispatch(setLoading(true))
     dispatch(setCurrentEpisode(episode))
     localStorage.setItem('current-episode', JSON.stringify(episode))
+
+    const audio = document.getElementById('audio')
+    let podcastTimes = JSON.parse(localStorage.getItem('podcast-time'))
+    if (!podcastTimes || typeof podcastTimes !== 'object') {
+      podcastTimes = {}
+    }
+    if (podcastTimes && trackId in podcastTimes) {
+      audio.currentTime = podcastTimes[trackId].time
+    } else {
+      audio.currentTime = 0
+    }
   }
 
   return (

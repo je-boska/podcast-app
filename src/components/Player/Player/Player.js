@@ -4,12 +4,14 @@ import {
   selectCurrentEpisode,
   setCurrentEpisode,
 } from '../../../slices/podcastSlice'
+import { selectLoading } from '../../../slices/playerSlice'
 import { selectViewPlayer, setViewPlayer } from '../../../slices/playerSlice'
 import './Player.css'
 
 import useAudioPlayer from '../useAudioPlayer'
 import Bar from '../Bar/Bar'
 import Play from '../Play/Play'
+import Loader from '../../Loader/Loader'
 
 const Player = () => {
   const [viewDescription, setViewDescription] = useState(false)
@@ -18,6 +20,7 @@ const Player = () => {
   const { values, setPlaying } = useAudioPlayer()
   const { playing } = values
 
+  const loading = useSelector(selectLoading)
   const episode = useSelector(selectCurrentEpisode)
   const {
     collectionName,
@@ -80,25 +83,30 @@ const Player = () => {
           <Bar playing={playing} trackId={trackId} setPlaying={setPlaying} />
         </div>
         <div className='player-header'>
-          <div className='header-play-button'>
-            <Play playing={playing} setPlaying={setPlaying} />
+          <div className='player-header-items'>
+            <div className='header-play-button'>
+              {loading ? (
+                <Loader color='white' />
+              ) : (
+                <Play playing={playing} setPlaying={setPlaying} />
+              )}
+            </div>
+            <div className='header-bar-container'>
+              <Bar
+                playing={playing}
+                trackId={trackId}
+                setPlaying={setPlaying}
+                header={true}
+              />
+            </div>
+            <p className='header-track-name'>{trackName}</p>
+            <h2
+              className='down-arrow'
+              onClick={() => dispatch(setViewPlayer(!viewPlayer))}
+            >
+              <i className='fas fa-chevron-down'></i>
+            </h2>
           </div>
-          <div className='header-bar-container'>
-            <Bar
-              playing={playing}
-              trackId={trackId}
-              setPlaying={setPlaying}
-              header={true}
-              loaderColor='white'
-            />
-          </div>
-          <p className='header-track-name'>{trackName}</p>
-          <h2
-            className='down-arrow'
-            onClick={() => dispatch(setViewPlayer(!viewPlayer))}
-          >
-            <i className='fas fa-chevron-down'></i>
-          </h2>
         </div>
       </div>
     </>

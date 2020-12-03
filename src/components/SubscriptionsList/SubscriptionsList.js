@@ -21,14 +21,18 @@ const SubscriptionsList = () => {
   }, [])
 
   return (
-    <>
-      <h3 className='subscriptions-title'>My Podcasts</h3>
+    <div className='subscriptions-container'>
+      <h3 className='subscriptions-title'>
+        {subscriptions.length < 1
+          ? 'No subscriptions yet - click the search icon to find podcasts'
+          : 'Subscriptions'}
+      </h3>
       <div className='subscriptions-list'>
         {subscriptions.map(podcast => (
           <PodcastListItem key={podcast.collectionId} podcast={podcast} />
         ))}
       </div>
-    </>
+    </div>
   )
 }
 

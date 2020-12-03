@@ -5,17 +5,11 @@ import moment from 'moment'
 import momentDurationFormatSetup from 'moment-duration-format'
 
 import useAudioPlayer from '../useAudioPlayer'
-import { selectLoading, setLoading } from '../../../slices/podcastSlice'
+import { setLoading, selectLoading } from '../../../slices/playerSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../Loader/Loader'
 
-export default function Bar({
-  playing,
-  setPlaying,
-  trackId,
-  header,
-  loaderColor,
-}) {
+export default function Bar({ playing, setPlaying, trackId, header }) {
   const {
     values,
     setDuration,
@@ -28,6 +22,7 @@ export default function Bar({
   const { duration, curTime, clickedTime, seekTime, seeking } = values
 
   const dispatch = useDispatch()
+
   const loading = useSelector(selectLoading)
 
   useEffect(() => {
@@ -43,7 +38,7 @@ export default function Bar({
 
     const setAudioData = () => {
       setDuration(audio.duration)
-      let podcastTimes = JSON.parse(localStorage.getItem('podcast-time'))
+      console.log('set audio data')
       if (podcastTimes && trackId in podcastTimes) {
         audio.currentTime = podcastTimes[trackId].time
         setCurTime(audio.currentTime)
@@ -52,7 +47,9 @@ export default function Bar({
     }
 
     const setAudioTime = () => {
-      podcastTimes[trackId] = { time: audio.currentTime, duration: duration }
+      if (audio.currentTime !== 0) {
+        podcastTimes[trackId] = { time: audio.currentTime, duration: duration }
+      }
       localStorage.setItem('podcast-time', JSON.stringify(podcastTimes))
       setCurTime(audio.currentTime)
       curTime === duration && setPlaying(false)
@@ -112,7 +109,7 @@ export default function Bar({
   return (
     <div className='bar'>
       {loading ? (
-        <Loader color={loaderColor} />
+        <Loader color={header && 'white'} />
       ) : (
         <>
           <span className='time'>{formatDuration(curTime)}</span>
