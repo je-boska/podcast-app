@@ -57,20 +57,21 @@ const Player = () => {
         >
           <i className='fas fa-chevron-up'></i>
         </h2>
-        <div className={`${!viewDescription && 'hidden'}`}>
-          <div className='description'>
-            <h4>{collectionName}</h4>
-            <p>{formattedDate}</p>
-            <p>{description}</p>
-          </div>
-        </div>
         <div
           className={`player-image gradient-overlay ${
-            viewDescription && 'dimmed'
+            viewDescription ? 'dimmed' : null
           }`}
           onClick={viewDescriptionHandler}
         >
           <img src={artworkUrl600} alt={trackName} />
+        </div>
+        <div
+          className={`description ${!viewDescription ? 'hidden' : null}`}
+          onClick={viewDescriptionHandler}
+        >
+          <h4>{collectionName}</h4>
+          <p>{formattedDate}</p>
+          <p>{description}</p>
         </div>
         <h3 className='title'>
           {trackName ? trackName : 'No current episode'}

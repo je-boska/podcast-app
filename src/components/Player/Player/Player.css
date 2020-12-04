@@ -18,10 +18,10 @@
 .player img {
   width: 100%;
   max-width: 800px;
-  z-index: -1;
 }
 
 .player-image {
+  z-index: 1;
   position: absolute;
   width: 100%;
   max-height: 100%;
@@ -35,10 +35,15 @@
   mask-image: linear-gradient(to top, transparent 15%, black 85%);
 }
 
+.dimmed {
+  opacity: 0.3;
+  z-index: -1;
+}
+
 .player .title {
   width: 90%;
   position: absolute;
-  top: 65vh;
+  top: 65%;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0.9;
@@ -46,7 +51,7 @@
 
 .play-container {
   position: absolute;
-  top: 75vh;
+  top: 75%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -58,7 +63,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 85vh;
+  top: 85%;
 }
 
 .play-pause-button {
@@ -128,17 +133,16 @@
   top: 10px;
 }
 
-.dimmed {
-  opacity: 0.3;
-}
-
 .description {
-  margin: 100px auto;
+  margin: 10% auto;
   max-width: 400px;
+  z-index: 3;
+  overflow: scroll;
+  height: 50%;
 }
 
 .description * {
-  margin: 10px 0px;
+  margin: 20px 0px;
 }
 
 .hidden {
