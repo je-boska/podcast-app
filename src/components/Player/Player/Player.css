@@ -43,7 +43,7 @@
 .player .title {
   width: 90%;
   position: absolute;
-  top: 65%;
+  top: 60%;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0.9;
@@ -134,15 +134,15 @@
 }
 
 .description {
-  margin: 10% auto;
+  margin: 50px auto;
   max-width: 400px;
   z-index: 3;
   overflow: scroll;
-  height: 50%;
+  height: 300px;
 }
 
 .description * {
-  margin: 20px 0px;
+  margin: 20px;
 }
 
 .hidden {
@@ -151,7 +151,7 @@
 
 @media only screen and (min-width: 565px) {
   .description {
-    margin: 20% auto;
+    height: 50%;
   }
 
   .header-bar-container {
