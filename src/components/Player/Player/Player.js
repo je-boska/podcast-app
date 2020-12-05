@@ -52,10 +52,10 @@ const Player = () => {
     <>
       <div className={`player ${viewPlayer && 'visible'}`}>
         <h2
-          className='up-arrow'
+          className='down-arrow'
           onClick={() => dispatch(setViewPlayer(!viewPlayer))}
         >
-          <i className='fas fa-chevron-up'></i>
+          <i className='fas fa-chevron-down'></i>
         </h2>
         <div
           className={`player-image gradient-overlay ${
@@ -112,10 +112,10 @@ const Player = () => {
               {trackName ? trackName : 'No current episode'}
             </p>*/}
             <h2
-              className='down-arrow'
+              className='up-arrow'
               onClick={() => dispatch(setViewPlayer(!viewPlayer))}
             >
-              <i className='fas fa-chevron-down'></i>
+              <i className='fas fa-chevron-up'></i>
             </h2>
           </div>
         </div>
