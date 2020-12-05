@@ -48,32 +48,39 @@ const Search = () => {
   }
 
   return (
-    <>
-      <div
-        className='search-icon'
-        onClick={() => {
-          dispatch(setSearching(!searching))
-          if (searching) {
-            dispatch(setSearchTerm(''))
-            dispatch(setSearchResults([]))
-          }
+    <div className='search-container'>
+      <form
+        onSubmit={e => {
+          submitHandler(e)
+          dispatch(setSearching(true))
         }}
+        className='search-bar'
       >
-        {searching ? (
-          <i className='fas fa-times' style={{ opacity: '0.7' }} />
-        ) : (
-          <i className='fas fa-search' />
-        )}
-      </div>
-      {searching && (
-        <form onSubmit={e => submitHandler(e)} className='search-bar'>
+        <div className='search-input'>
+          <div
+            className='search-icon'
+            onClick={() => {
+              dispatch(setSearching(!searching))
+              if (searching) {
+                dispatch(setSearchTerm(''))
+                dispatch(setSearchResults([]))
+              }
+            }}
+          >
+            {searching ? (
+              <i className='fas fa-times icon' />
+            ) : (
+              <i className='fas fa-search icon' />
+            )}
+          </div>
           <input
-            placeholder='Search'
+            placeholder='Search for podcasts'
             value={searchTerm}
             onChange={e => dispatch(setSearchTerm(e.target.value))}
           />
-        </form>
-      )}
+        </div>
+      </form>
+
       {loading ? (
         <div style={{ margin: '100px' }}>
           <Loader />
@@ -85,14 +92,7 @@ const Search = () => {
             style={{ flexBasis: `${results.length > 0 ? '600px' : '0px'}` }}
           >
             <div>
-              <div
-                className='podcast-list'
-                style={{
-                  margin: `${
-                    results.length < 0 ? '0px auto' : '105px auto 0px auto'
-                  }`,
-                }}
-              >
+              <div className='podcast-list'>
                 {loading ? (
                   <Loader />
                 ) : (
@@ -108,7 +108,7 @@ const Search = () => {
           </div>
         )
       )}
-    </>
+    </div>
   )
 }
 

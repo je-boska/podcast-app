@@ -108,9 +108,9 @@ const Player = () => {
                 />
               </div>
             )}
-            <p className='header-track-name'>
+            {/*<p className='header-track-name'>
               {trackName ? trackName : 'No current episode'}
-            </p>
+            </p>*/}
             <h2
               className='down-arrow'
               onClick={() => dispatch(setViewPlayer(!viewPlayer))}

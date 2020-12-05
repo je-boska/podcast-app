@@ -1,14 +1,14 @@
 .subscriptions-container {
-  flex-basis: 600px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .subscriptions-title {
   font-weight: 100;
-  text-align: center;
-  margin: 70px 50px 20px 50px;
+  margin: 20px 0px;
 }
 
 .subscriptions-list {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0 auto 100px auto;
 }

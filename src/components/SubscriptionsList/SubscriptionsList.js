@@ -29,7 +29,7 @@ const SubscriptionsList = () => {
             to find something to subscribe to
           </p>
         ) : (
-          'Subscriptions'
+          'Your subscriptions'
         )}
       </h3>
       <div className='subscriptions-list'>
