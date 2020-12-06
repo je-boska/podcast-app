@@ -29,11 +29,11 @@ const EpisodeListItem = ({ episode }) => {
     if (episode.trackId === currentEpisode.trackId) {
       return
     }
+    const audio = document.getElementById('audio')
     dispatch(setLoading(true))
     dispatch(setCurrentEpisode(episode))
     localStorage.setItem('current-episode', JSON.stringify(episode))
 
-    const audio = document.getElementById('audio')
     let podcastTimes = JSON.parse(localStorage.getItem('podcast-time'))
     if (!podcastTimes || typeof podcastTimes !== 'object') {
       podcastTimes = {}
