@@ -23,11 +23,7 @@ const SubscriptionsList = () => {
   return (
     <div className='subscriptions-container'>
       <h4 className='subscriptions-title'>
-        {subscriptions.length < 1 ? (
-          <p style={{ marginTop: '50%' }}>Not subscribed to any podcasts</p>
-        ) : (
-          'Your subscriptions'
-        )}
+        {subscriptions.length > 0 && 'Your subscriptions'}
       </h4>
       <div className='subscriptions-list'>
         {subscriptions.map(podcast => (
