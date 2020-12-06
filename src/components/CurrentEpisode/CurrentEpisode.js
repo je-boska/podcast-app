@@ -6,11 +6,12 @@ import {
   selectCurrentEpisode,
   setCurrentEpisode,
 } from '../../slices/podcastSlice'
-import EpisodeListItem from '../EpisodeListItem/EpisodeListItem'
+import { Link } from 'react-router-dom'
 
 const CurrentEpisode = () => {
   const dispatch = useDispatch()
   const episode = useSelector(selectCurrentEpisode)
+  const { collectionName, trackName, artworkUrl160 } = episode
 
   useEffect(() => {
     const localEpisode = JSON.parse(localStorage.getItem('current-episode'))
@@ -25,12 +26,15 @@ const CurrentEpisode = () => {
     <>
       {episode.trackId && (
         <div className='current-episode-container'>
-          <div className='current-episode'>
-            <h4 className='current-episode-title'>Playing</h4>
-            {episode.trackId && (
-              <EpisodeListItem key={episode.trackId} episode={episode} />
-            )}
-          </div>
+          <Link to='/player' style={{ textDecoration: 'none', color: 'white' }}>
+            <div className='current-episode'>
+              <img src={artworkUrl160} alt={trackName} />
+              <div className='current-episode-info'>
+                <h5>{collectionName}</h5>
+                <h3>{trackName}</h3>
+              </div>
+            </div>
+          </Link>
         </div>
       )}
     </>
