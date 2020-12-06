@@ -18,7 +18,7 @@
 }
 
 .search-bar {
-  margin: 0px 2px;
+  margin: 0px 8px;
 }
 
 .search-bar input {
@@ -38,5 +38,5 @@
 
 .results-list {
   max-width: 600px;
-  margin: 0px 2px;
+  margin: 0px 8px;
 }

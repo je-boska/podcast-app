@@ -61,7 +61,7 @@ const EpisodeList = () => {
           <div className='episode-list-info-and-sub'>
             <div className='episode-list-info'>
               <h3>{collectionName}</h3>
-              <p>{artistName}</p>
+              <p>by {artistName}</p>
               <p>{primaryGenreName}</p>
             </div>
             <SubscribeButton podcast={podcast} />
