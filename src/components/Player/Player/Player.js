@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentScreen } from '../../../slices/playerSlice'
 import {
@@ -8,8 +8,6 @@ import {
 import './Player.css'
 
 const Player = () => {
-  const [viewDescription, setViewDescription] = useState(false)
-
   const episode = useSelector(selectCurrentEpisode)
   const {
     collectionName,
@@ -19,7 +17,7 @@ const Player = () => {
     description,
   } = episode
 
-  const formattedDate = releaseDate ? releaseDate.slice(0, 9) : null
+  const formattedDate = releaseDate ? releaseDate.slice(0, 10) : null
 
   const dispatch = useDispatch()
 
@@ -33,32 +31,16 @@ const Player = () => {
     // eslint-disable-next-line
   }, [])
 
-  const viewDescriptionHandler = () => {
-    viewDescription ? setViewDescription(false) : setViewDescription(true)
-  }
-
   return (
     <>
-      <div className={`player`}>
-        <div
-          className={`player-image gradient-overlay ${
-            viewDescription ? 'dimmed' : null
-          }`}
-          onClick={viewDescriptionHandler}
-        >
-          <img src={artworkUrl600} alt={trackName} />
-        </div>
-        <div
-          className={`description ${!viewDescription ? 'hidden' : null}`}
-          onClick={viewDescriptionHandler}
-        >
-          <h4>{collectionName}</h4>
+      <div className='player'>
+        <img src={artworkUrl600} alt={trackName} className='player-image' />
+        <div className='episode-info'>
+          <h3>{collectionName}</h3>
+          <h4>{trackName ? trackName : 'No current episode'}</h4>
           <p>{formattedDate}</p>
           <p>{description}</p>
         </div>
-        <h3 className='title'>
-          {trackName ? trackName : 'No current episode'}
-        </h3>
       </div>
     </>
   )

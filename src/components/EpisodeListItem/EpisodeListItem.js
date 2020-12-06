@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { setCurrentEpisode } from '../../slices/podcastSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  selectCurrentEpisode,
+  setCurrentEpisode,
+} from '../../slices/podcastSlice'
 import { setLoading } from '../../slices/playerSlice'
 import './EpisodeListItem.css'
 import { Link } from 'react-router-dom'
@@ -9,6 +12,7 @@ const EpisodeListItem = ({ episode }) => {
   const { artworkUrl160, trackName, releaseDate, trackId } = episode
 
   const [playedPercentage, setPlayedPercentage] = useState(0)
+  const currentEpisode = useSelector(selectCurrentEpisode)
 
   const dispatch = useDispatch()
 
@@ -22,6 +26,9 @@ const EpisodeListItem = ({ episode }) => {
   }, [])
 
   const selectEpisodeHandler = () => {
+    if (episode.trackId === currentEpisode.trackId) {
+      return
+    }
     dispatch(setLoading(true))
     dispatch(setCurrentEpisode(episode))
     localStorage.setItem('current-episode', JSON.stringify(episode))

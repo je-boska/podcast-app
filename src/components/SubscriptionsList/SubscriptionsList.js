@@ -24,10 +24,7 @@ const SubscriptionsList = () => {
     <div className='subscriptions-container'>
       <h3 className='subscriptions-title'>
         {subscriptions.length < 1 ? (
-          <p style={{ marginTop: '50%' }}>
-            Not subscribed to any podcasts <br /> - <br /> Click the search icon
-            to find something to subscribe to
-          </p>
+          <p style={{ marginTop: '50%' }}>Not subscribed to any podcasts</p>
         ) : (
           'Your subscriptions'
         )}

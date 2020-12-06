@@ -88,23 +88,18 @@ const Search = () => {
         </div>
       ) : (
         results.length > 0 && (
-          <div
-            className='search-container'
-            style={{ flexBasis: `${results.length > 0 ? '600px' : '0px'}` }}
-          >
-            <div>
-              <div className='podcast-list'>
-                {loading ? (
-                  <Loader />
-                ) : (
-                  results.map(podcast => (
-                    <PodcastListItem
-                      key={podcast.collectionId}
-                      podcast={podcast}
-                    />
-                  ))
-                )}
-              </div>
+          <div className='search-container'>
+            <div className='results-list'>
+              {loading ? (
+                <Loader />
+              ) : (
+                results.map(podcast => (
+                  <PodcastListItem
+                    key={podcast.collectionId}
+                    podcast={podcast}
+                  />
+                ))
+              )}
             </div>
           </div>
         )

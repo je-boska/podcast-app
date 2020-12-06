@@ -21,13 +21,15 @@ const CurrentEpisode = () => {
   }, [dispatch, episode])
 
   return (
-    <div style={{ maxWidth: '600px', margin: '50px auto 50px auto' }}>
-      <h3 style={{ fontWeight: '100', margin: '20px 0px' }}>
-        Currently playing
-      </h3>
-      {episode.trackId && (
-        <EpisodeListItem key={episode.trackId} episode={episode} />
-      )}
+    <div className='current-episode-container' style={{ margin: '0px 2px' }}>
+      <div style={{ maxWidth: '600px', margin: '50px auto 50px auto' }}>
+        <h3 style={{ fontWeight: '100', margin: '20px 0px' }}>
+          Currently playing
+        </h3>
+        {episode.trackId && (
+          <EpisodeListItem key={episode.trackId} episode={episode} />
+        )}
+      </div>
     </div>
   )
 }

@@ -6,7 +6,7 @@
 .search-icon {
   position: absolute;
   font-size: 16px;
-  padding: 12px;
+  padding: 11px;
   text-align: center;
   min-width: 50px;
   cursor: pointer;
@@ -15,6 +15,10 @@
 
 .search-icon:hover {
   opacity: 0.5;
+}
+
+.search-bar {
+  margin: 0px 2px;
 }
 
 .search-bar input {
@@ -32,10 +36,7 @@
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-.podcast-list {
-  width: 100%;
+.results-list {
   max-width: 600px;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
+  margin: 0px 2px;
 }
