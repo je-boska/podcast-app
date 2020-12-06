@@ -33,18 +33,19 @@ const Search = () => {
   }, [])
 
   const getSearchResults = async () => {
-    if (searchTerm.length > 0) {
-      dispatch(setSearching(true))
-      dispatch(setLoading(true))
-      const newResults = await searchPodcasts(searchTerm)
-      dispatch(setSearchResults(newResults))
-      dispatch(setLoading(false))
-    }
+    dispatch(setSearching(true))
+    dispatch(setLoading(true))
+    const newResults = await searchPodcasts(searchTerm)
+    dispatch(setSearchResults(newResults))
+    dispatch(setLoading(false))
   }
 
   const submitHandler = e => {
     e.preventDefault()
-    getSearchResults()
+    document.getElementById('search-input').blur()
+    if (searchTerm.length > 0) {
+      getSearchResults()
+    }
   }
 
   return (
@@ -74,6 +75,7 @@ const Search = () => {
           )}
         </div>
         <input
+          id='search-input'
           placeholder='Search for podcasts'
           value={searchTerm}
           onChange={e => {
