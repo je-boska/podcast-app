@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentScreen } from '../../slices/playerSlice'
 import {
   selectCurrentEpisode,
   setCurrentEpisode,
@@ -15,6 +16,8 @@ const CurrentEpisode = () => {
     if (!episode.trackId && localEpisode) {
       dispatch(setCurrentEpisode(localEpisode))
     }
+
+    dispatch(setCurrentScreen('home'))
   }, [dispatch, episode])
 
   return (

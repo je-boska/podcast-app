@@ -1,17 +1,18 @@
 import React from 'react'
-import './Header.css'
+import './Footer.css'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { selectLoading } from '../../slices/playerSlice'
-import { selectCurrentEpisode } from '../../slices/podcastSlice'
-import Loader from '../Loader/Loader'
-import Play from '../Player/Play/Play'
-import useAudioPlayer from '../Player/useAudioPlayer'
-import Bar from '../Player/Bar/Bar'
+import { selectCurrentScreen, selectLoading } from '../../../slices/playerSlice'
+import { selectCurrentEpisode } from '../../../slices/podcastSlice'
+import Loader from '../../Loader/Loader'
+import Play from '../Play/Play'
+import useAudioPlayer from '../useAudioPlayer'
+import Bar from '../Bar/Bar'
 
 const Header = () => {
   const loading = useSelector(selectLoading)
   const episode = useSelector(selectCurrentEpisode)
+  const currentScreen = useSelector(selectCurrentScreen)
   const { trackName, trackId, episodeUrl } = episode
 
   const { values, setPlaying } = useAudioPlayer()
@@ -42,9 +43,16 @@ const Header = () => {
             />
           </div>
         )}
-        <Link to='/' style={{ textDecoration: 'none', color: 'white' }}>
-          <h2 className='up-arrow'>
-            <i className='fas fa-chevron-up'></i>
+        <Link
+          to={`${currentScreen === 'player' ? '/' : '/player'}`}
+          style={{ textDecoration: 'none', color: 'white' }}
+        >
+          <h2 className='footer-nav-button'>
+            {currentScreen === 'player' ? (
+              <i className='fas fa-bars'></i>
+            ) : (
+              <i className='fas fa-chevron-up'></i>
+            )}
           </h2>
         </Link>
       </div>

@@ -1,8 +1,7 @@
 .episode-list-container {
   width: 100%;
   max-width: 1000px;
-  margin-top: 80px;
-  margin: 0 auto;
+  margin: 0 auto 80px auto;
   display: flex;
   justify-content: center;
   align-items: center;

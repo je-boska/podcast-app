@@ -5,7 +5,7 @@ import Search from './components/Search/Search'
 import SubscriptionsList from './components/SubscriptionsList/SubscriptionsList'
 import Player from './components/Player/Player/Player'
 import EpisodeList from './components/EpisodeList/EpisodeList'
-import Header from './components/Header/Header'
+import Header from './components/Player/Footer/Footer'
 import CurrentEpisode from './components/CurrentEpisode/CurrentEpisode'
 
 function App() {

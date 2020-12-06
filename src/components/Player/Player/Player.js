@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentScreen } from '../../../slices/playerSlice'
 import {
   selectCurrentEpisode,
   setCurrentEpisode,
@@ -27,6 +28,8 @@ const Player = () => {
     if (!episode.collectionName && localEpisode) {
       dispatch(setCurrentEpisode(localEpisode))
     }
+
+    dispatch(setCurrentScreen('player'))
     // eslint-disable-next-line
   }, [])
 
