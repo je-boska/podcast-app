@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentScreen } from '../../../slices/playerSlice'
 import {
@@ -8,6 +8,8 @@ import {
 import './Player.css'
 
 const Player = () => {
+  const [viewFullDescription, setViewFullDescription] = useState(false)
+
   const episode = useSelector(selectCurrentEpisode)
   const {
     collectionName,
@@ -39,7 +41,19 @@ const Player = () => {
           <h3>{collectionName}</h3>
           <h4>{trackName ? trackName : 'No current episode'}</h4>
           <p>{formattedDate}</p>
-          <p>{description}</p>
+          <p>
+            {description && !viewFullDescription
+              ? `${description.slice(0, 200)}...`
+              : description && viewFullDescription && description}
+            {description && !viewFullDescription && (
+              <strong
+                style={{ cursor: 'pointer', color: 'blue', fontWeight: '300' }}
+                onClick={() => setViewFullDescription(true)}
+              >
+                Read more
+              </strong>
+            )}
+          </p>
         </div>
       </div>
     </>

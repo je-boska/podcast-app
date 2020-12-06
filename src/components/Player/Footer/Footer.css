@@ -1,4 +1,4 @@
-.player-header {
+.player-footer {
   z-index: 3;
   position: fixed;
   bottom: 0px;
@@ -12,35 +12,33 @@
   width: 100%;
 }
 
-.player-header-items {
+.player-footer-items {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
 }
 
-.header-play-button {
+.footer-play-button {
   margin-right: 10px;
   font-size: 14px;
   cursor: pointer;
   transition: 0.15s opacity linear;
 }
 
-.header-play-button:hover {
+.footer-play-button:hover {
   opacity: 0.7;
 }
 
-.header-bar-container {
+.footer-bar-container {
   display: flex;
   justify-content: center;
-  width: 80%;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  flex-basis: 100%;
 }
 
 .footer-nav-button {
+  margin-left: 10px;
   cursor: pointer;
   transition: 0.15s opacity linear;
 }
@@ -49,41 +47,13 @@
   opacity: 0.7;
 }
 
-.footer-nav-button {
-  margin-left: 10px;
-}
-
-.description {
-  margin: 50px auto;
-  max-width: 400px;
-  z-index: 3;
-  overflow: scroll;
-  height: 300px;
-}
-
-.description * {
-  margin: 20px;
-}
-
-.hidden {
-  opacity: 0;
-}
-
 @media only screen and (min-width: 565px) {
-  .header-play-button {
+  .footer-play-button {
     margin-right: 20px;
     font-size: 14px;
   }
 
-  .up-arrow {
+  .footer-nav-button {
     margin-left: 20px;
-  }
-
-  .description {
-    height: 50%;
-  }
-
-  .header-track-name {
-    width: 40%;
   }
 }

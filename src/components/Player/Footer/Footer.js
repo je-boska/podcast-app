@@ -9,7 +9,7 @@ import Play from '../Play/Play'
 import useAudioPlayer from '../useAudioPlayer'
 import Bar from '../Bar/Bar'
 
-const Header = () => {
+const Footer = () => {
   const loading = useSelector(selectLoading)
   const episode = useSelector(selectCurrentEpisode)
   const currentScreen = useSelector(selectCurrentScreen)
@@ -19,13 +19,13 @@ const Header = () => {
   const { playing } = values
 
   return (
-    <div className='player-header'>
+    <div className='player-footer'>
       <audio id='audio' src={episodeUrl}>
         No audio
       </audio>
-      <div className='player-header-items'>
+      <div className='player-footer-items'>
         {trackName && (
-          <div className='header-play-button'>
+          <div className='footer-play-button'>
             {loading ? (
               <Loader color='white' />
             ) : (
@@ -34,7 +34,7 @@ const Header = () => {
           </div>
         )}
         {trackName && (
-          <div className='header-bar-container'>
+          <div className='footer-bar-container'>
             <Bar
               playing={playing}
               trackId={trackId}
@@ -60,4 +60,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Footer

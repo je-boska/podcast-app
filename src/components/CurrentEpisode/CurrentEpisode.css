@@ -1,0 +1,12 @@
+.current-episode-container {
+  margin: 0px 2px;
+}
+
+.current-episode {
+  max-width: 600px;
+  margin: 0px auto 50px auto;
+}
+
+.current-episode-title {
+  margin: 20px 10px;
+}

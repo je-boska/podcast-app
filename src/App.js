@@ -5,14 +5,14 @@ import Search from './components/Search/Search'
 import SubscriptionsList from './components/SubscriptionsList/SubscriptionsList'
 import Player from './components/Player/Player/Player'
 import EpisodeList from './components/EpisodeList/EpisodeList'
-import Header from './components/Player/Footer/Footer'
+import Footer from './components/Player/Footer/Footer'
 import CurrentEpisode from './components/CurrentEpisode/CurrentEpisode'
 
 function App() {
   return (
     <div className='App'>
       <Router>
-        <Route path='/' component={Header} />
+        <Route path='/' component={Footer} />
         <Route path='/' component={CurrentEpisode} exact />
         <Route path='/' component={Search} exact />
         <Route path='/' component={SubscriptionsList} exact />

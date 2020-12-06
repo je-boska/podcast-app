@@ -22,13 +22,13 @@ const SubscriptionsList = () => {
 
   return (
     <div className='subscriptions-container'>
-      <h3 className='subscriptions-title'>
+      <h4 className='subscriptions-title'>
         {subscriptions.length < 1 ? (
           <p style={{ marginTop: '50%' }}>Not subscribed to any podcasts</p>
         ) : (
           'Your subscriptions'
         )}
-      </h3>
+      </h4>
       <div className='subscriptions-list'>
         {subscriptions.map(podcast => (
           <PodcastListItem key={podcast.collectionId} podcast={podcast} />
