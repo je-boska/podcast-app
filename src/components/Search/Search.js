@@ -18,9 +18,8 @@ import PodcastListItem from '../PodcastListItem/PodcastListItem'
 import { setSubscriptions } from '../../slices/subscriptionsSlice'
 
 const Search = () => {
-  const searching = useSelector(selectSearching)
-
   const dispatch = useDispatch()
+  const searching = useSelector(selectSearching)
   const loading = useSelector(selectLoading)
   const searchTerm = useSelector(selectSearchTerm)
   const results = useSelector(selectSearchResults)
@@ -35,6 +34,7 @@ const Search = () => {
 
   const getSearchResults = async () => {
     if (searchTerm.length > 0) {
+      dispatch(setSearching(true))
       dispatch(setLoading(true))
       const newResults = await searchPodcasts(searchTerm)
       dispatch(setSearchResults(newResults))
@@ -52,33 +52,34 @@ const Search = () => {
       <form
         onSubmit={e => {
           submitHandler(e)
-          dispatch(setSearching(true))
         }}
         className='search-bar'
       >
-        <div className='search-input'>
-          <div
-            className='search-icon'
-            onClick={() => {
-              dispatch(setSearching(!searching))
-              if (searching) {
-                dispatch(setSearchTerm(''))
-                dispatch(setSearchResults([]))
-              }
-            }}
-          >
-            {searching ? (
-              <i className='fas fa-times icon' />
-            ) : (
-              <i className='fas fa-search icon' />
-            )}
-          </div>
-          <input
-            placeholder='Search for podcasts'
-            value={searchTerm}
-            onChange={e => dispatch(setSearchTerm(e.target.value))}
-          />
+        <div
+          className='search-icon'
+          onClick={e => {
+            if (searching) {
+              dispatch(setSearching(false))
+              dispatch(setSearchTerm(''))
+              dispatch(setSearchResults([]))
+            } else {
+              submitHandler(e)
+            }
+          }}
+        >
+          {searching ? (
+            <i className='fas fa-times' />
+          ) : (
+            <i className='fas fa-search' />
+          )}
         </div>
+        <input
+          placeholder='Search for podcasts'
+          value={searchTerm}
+          onChange={e => {
+            dispatch(setSearchTerm(e.target.value))
+          }}
+        />
       </form>
 
       {loading ? (

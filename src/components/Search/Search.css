@@ -4,57 +4,32 @@
 }
 
 .search-icon {
-  display: inline;
-  font-size: 1.8rem;
-  color: black;
-  margin: 8px 5px;
-
-  /*
   position: absolute;
-  top: 65px;
-  left: 15px;
-  */
-  cursor: pointer;
-  transition: 0.15s opacity linear;
-}
-
-.search-input i {
-  position: absolute;
-}
-
-.icon {
   font-size: 16px;
   padding: 12px;
   text-align: center;
   min-width: 50px;
+  cursor: pointer;
+  transition: 0.15s opacity linear;
 }
 
 .search-icon:hover {
   opacity: 0.5;
 }
 
-.search-bar {
-  display: inline;
-  /*
-  position: absolute;
-  top: 65px;
-  left: 50px;
-  margin-top: -5px;
-    */
-}
-
 .search-bar input {
   font-size: 16px;
-
+  width: 100%;
   max-width: 600px;
   padding: 10px 25px 10px 50px;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .search-bar input:focus {
   outline: none;
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .podcast-list {

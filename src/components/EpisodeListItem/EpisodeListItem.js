@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { setCurrentEpisode } from '../../slices/podcastSlice'
 import { setLoading } from '../../slices/playerSlice'
 import './EpisodeListItem.css'
+import { Link } from 'react-router-dom'
 
 const EpisodeListItem = ({ episode }) => {
   const { artworkUrl160, trackName, releaseDate, trackId } = episode
@@ -38,20 +39,26 @@ const EpisodeListItem = ({ episode }) => {
   }
 
   return (
-    <div className='episode-list-item' onClick={selectEpisodeHandler}>
-      <img src={artworkUrl160} alt={trackName} />
-      <div className='episode-list-item-text'>
-        <h4>{trackName}</h4>
-        <p>{releaseDate.slice(0, 10)}</p>
-        <p style={{ color: 'green' }}>{playedPercentage > 90 && 'Played'}</p>
-        <div
-          className='played-percentage-bar'
-          style={{
-            background: `linear-gradient(to right, orange ${playedPercentage}%, lightGrey 0)`,
-          }}
-        ></div>
-      </div>
-    </div>
+    <>
+      <Link to='/player' style={{ textDecoration: 'none', color: 'black' }}>
+        <div className='episode-list-item' onClick={selectEpisodeHandler}>
+          <img src={artworkUrl160} alt={trackName} />
+          <div className='episode-list-item-text'>
+            <h4>{trackName}</h4>
+            <p>{releaseDate.slice(0, 10)}</p>
+            <p style={{ color: 'green' }}>
+              {playedPercentage > 90 && 'Played'}
+            </p>
+            <div
+              className='played-percentage-bar'
+              style={{
+                background: `linear-gradient(to right, orange ${playedPercentage}%, lightGrey 0)`,
+              }}
+            ></div>
+          </div>
+        </div>
+      </Link>
+    </>
   )
 }
 

@@ -47,38 +47,36 @@ const EpisodeList = () => {
   }
 
   return (
-    <>
-      <Link to='/'>
-        <div className='back-arrow'>
-          <i className='fas fa-chevron-left' />
-        </div>
-      </Link>
-      <div className='episode-list-container'>
-        {loading || episodes.length < 1 ? (
-          <Loader />
-        ) : (
-          <div className='episode-list-hero'>
-            <img src={artworkUrl600} alt={collectionName} />
-            <div className='episode-list-info-and-sub'>
-              <div className='episode-list-info'>
-                <h3>{collectionName}</h3>
-                <p>{artistName}</p>
-                <p>{primaryGenreName}</p>
-              </div>
-              <SubscribeButton podcast={podcast} />
+    <div className='episode-list-container'>
+      {loading || episodes.length < 1 ? (
+        <Loader />
+      ) : (
+        <div className='episode-list-hero'>
+          <Link to='/'>
+            <div className='back-arrow'>
+              <i className='fas fa-chevron-left' />
             </div>
+          </Link>
+          <img src={artworkUrl600} alt={collectionName} />
+          <div className='episode-list-info-and-sub'>
+            <div className='episode-list-info'>
+              <h3>{collectionName}</h3>
+              <p>{artistName}</p>
+              <p>{primaryGenreName}</p>
+            </div>
+            <SubscribeButton podcast={podcast} />
           </div>
-        )}
-
-        <div className='episode-list'>
-          {loading
-            ? null
-            : episodes.map(episode => (
-                <EpisodeListItem key={episode.trackId} episode={episode} />
-              ))}
         </div>
+      )}
+
+      <div className='episode-list'>
+        {loading
+          ? null
+          : episodes.map(episode => (
+              <EpisodeListItem key={episode.trackId} episode={episode} />
+            ))}
       </div>
-    </>
+    </div>
   )
 }
 
