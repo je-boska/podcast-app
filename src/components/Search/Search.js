@@ -76,6 +76,7 @@ const Search = () => {
         </div>
         <input
           id='search-input'
+          autocomplete='off'
           placeholder='Search for podcasts'
           value={searchTerm}
           onChange={e => {
