@@ -1,26 +1,41 @@
-.current-episode-container {
-  height: 100px;
-  background-color: black;
-}
-
 .current-episode {
+  width: 100%;
+  max-width: 600px;
   margin: 0px auto;
-  padding: 8px 10px 8px 8px;
-  height: 100%;
-  max-width: 584px;
-  display: flex;
-  align-items: center;
-}
-
-.current-episode * {
-  color: white;
-  margin: 5px 0px;
 }
 
 .current-episode img {
-  max-height: 100%;
+  width: 100%;
+  max-width: 800px;
+}
+
+.current-episode .title {
+  width: 90%;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.9;
 }
 
 .current-episode-info {
-  margin-left: 15px;
+  margin: 20px auto 50px auto;
+  max-width: 400px;
+  z-index: 3;
+  overflow: scroll;
+  text-align: center;
+}
+
+.current-episode-info * {
+  margin: 10px 20px;
+}
+
+.current-episode-info p {
+  opacity: 0.8;
+}
+
+@media only screen and (min-width: 565px) {
+  .current-episode {
+    margin: 20vh auto;
+  }
 }

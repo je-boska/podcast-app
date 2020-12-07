@@ -1,0 +1,26 @@
+.current-episode-hero-container {
+  height: 100px;
+  background-color: black;
+}
+
+.current-episode-hero {
+  margin: 0px auto;
+  padding: 8px 10px 8px 8px;
+  height: 100%;
+  max-width: 584px;
+  display: flex;
+  align-items: center;
+}
+
+.current-episode-hero * {
+  color: white;
+  margin: 5px 0px;
+}
+
+.current-episode-hero img {
+  max-height: 100%;
+}
+
+.current-episode-hero-info {
+  margin-left: 15px;
+}

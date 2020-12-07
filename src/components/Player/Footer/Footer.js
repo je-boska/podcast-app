@@ -58,11 +58,13 @@ const Footer = () => {
           </div>
         )}
         <Link
-          to={`${currentScreen === 'player' ? '/' : '/player'}`}
+          to={`${
+            currentScreen === 'current-episode' ? '/' : '/current-episode'
+          }`}
           style={{ textDecoration: 'none', color: 'white' }}
         >
           <h2 className='footer-nav-button'>
-            {currentScreen === 'player' ? (
+            {currentScreen === 'current-episode' ? (
               <i className='fas fa-bars'></i>
             ) : (
               <i className='fas fa-chevron-up'></i>

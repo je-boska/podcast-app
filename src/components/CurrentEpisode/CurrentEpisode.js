@@ -1,42 +1,61 @@
-import React, { useEffect } from 'react'
-import './CurrentEpisode.css'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentScreen } from '../../slices/playerSlice'
 import {
   selectCurrentEpisode,
   setCurrentEpisode,
 } from '../../slices/podcastSlice'
-import { Link } from 'react-router-dom'
+import './CurrentEpisode.css'
 
 const CurrentEpisode = () => {
-  const dispatch = useDispatch()
+  const [viewFullDescription, setViewFullDescription] = useState(false)
+
   const episode = useSelector(selectCurrentEpisode)
-  const { collectionName, trackName, artworkUrl160 } = episode
+  const {
+    collectionName,
+    trackName,
+    releaseDate,
+    artworkUrl600,
+    description,
+  } = episode
+
+  const formattedDate = releaseDate ? releaseDate.slice(0, 10) : null
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const localEpisode = JSON.parse(localStorage.getItem('current-episode'))
-    if (!episode.trackId && localEpisode) {
+    if (!episode.collectionName && localEpisode) {
       dispatch(setCurrentEpisode(localEpisode))
     }
 
-    dispatch(setCurrentScreen('home'))
-  }, [dispatch, episode])
+    dispatch(setCurrentScreen('current-episode'))
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <>
-      {episode.trackId && (
-        <div className='current-episode-container'>
-          <Link to='/player' style={{ textDecoration: 'none', color: 'white' }}>
-            <div className='current-episode'>
-              <img src={artworkUrl160} alt={trackName} />
-              <div className='current-episode-info'>
-                <h5>{collectionName}</h5>
-                <h3>{trackName}</h3>
-              </div>
-            </div>
-          </Link>
+      <div className='current-episode'>
+        <img src={artworkUrl600} alt={trackName} />
+        <div className='current-episode-info'>
+          <h3>{collectionName}</h3>
+          <h4>{trackName ? trackName : 'No current episode'}</h4>
+          <p>{formattedDate}</p>
+          <p>
+            {description && !viewFullDescription
+              ? `${description.slice(0, 200)}...`
+              : description && viewFullDescription && description}
+            {description && !viewFullDescription && (
+              <strong
+                style={{ cursor: 'pointer', color: 'blue', fontWeight: '300' }}
+                onClick={() => setViewFullDescription(true)}
+              >
+                Read more
+              </strong>
+            )}
+          </p>
         </div>
-      )}
+      </div>
     </>
   )
 }
