@@ -47,7 +47,10 @@ const EpisodeListItem = ({ episode }) => {
 
   return (
     <>
-      <Link to='/player' style={{ textDecoration: 'none', color: 'black' }}>
+      <Link
+        to='/current-episode'
+        style={{ textDecoration: 'none', color: 'black' }}
+      >
         <div className='episode-list-item' onClick={selectEpisodeHandler}>
           <img src={artworkUrl160} alt={trackName} />
           <div className='episode-list-item-text'>
