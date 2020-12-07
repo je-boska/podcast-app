@@ -33,8 +33,8 @@ const CurrentEpisodeHero = () => {
             <div className='current-episode-hero'>
               <img src={artworkUrl160} alt={trackName} />
               <div className='current-episode-hero-info'>
-                <h5>{collectionName}</h5>
-                <h3>{trackName}</h3>
+                <h4>{collectionName}</h4>
+                <h2>{trackName}</h2>
               </div>
             </div>
           </Link>

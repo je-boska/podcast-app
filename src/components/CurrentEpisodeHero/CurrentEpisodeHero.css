@@ -17,10 +17,20 @@
   margin: 5px 0px;
 }
 
+.current-episode-hero h2 {
+  font-size: 22px;
+}
+
 .current-episode-hero img {
   max-height: 100%;
 }
 
 .current-episode-hero-info {
   margin-left: 15px;
+}
+
+@media only screen and (min-width: 565px) {
+  .current-episode-hero-container {
+    height: 300px;
+  }
 }

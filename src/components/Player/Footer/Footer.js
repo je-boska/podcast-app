@@ -33,11 +33,11 @@ const Footer = () => {
   })
 
   return (
-    <div className='player-footer'>
+    <div className='footer'>
       <audio id='audio' src={episodeUrl}>
         No audio
       </audio>
-      <div className='player-footer-items'>
+      <div className='footer-items'>
         {trackName && (
           <div className='footer-play-button'>
             {loading ? (

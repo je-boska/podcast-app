@@ -49,7 +49,9 @@ const EpisodeList = () => {
   return (
     <div className='episode-list-container'>
       {loading || episodes.length < 1 ? (
-        <Loader />
+        <div style={{ margin: '0 auto', width: '80px' }}>
+          <Loader />
+        </div>
       ) : (
         <div className='episode-list-hero'>
           <Link to='/'>
