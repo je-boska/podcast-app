@@ -42,10 +42,10 @@ const CurrentEpisode = () => {
           <h4>{trackName ? trackName : 'No current episode'}</h4>
           <p>{formattedDate}</p>
           <p>
-            {description && !viewFullDescription
+            {description && description.length > 200 && !viewFullDescription
               ? `${description.slice(0, 200)}...`
-              : description && viewFullDescription && description}
-            {description && !viewFullDescription && (
+              : description}
+            {description && description.length > 200 && !viewFullDescription && (
               <strong
                 style={{ cursor: 'pointer', color: 'blue', fontWeight: '300' }}
                 onClick={() => setViewFullDescription(true)}

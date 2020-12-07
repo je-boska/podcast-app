@@ -20,10 +20,10 @@
 
 .current-episode-info {
   margin: 20px auto 50px auto;
-  max-width: 400px;
+  max-width: 430px;
+  line-height: 1.3;
   z-index: 3;
   overflow: scroll;
-  text-align: center;
 }
 
 .current-episode-info * {
