@@ -9,8 +9,6 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-/* Firefox hide scrollbar */
-
 html {
   scrollbar-width: none;
 }
