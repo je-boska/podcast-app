@@ -34,6 +34,8 @@
   opacity: 0.8;
 }
 
+/* Trying different heights */
+
 @media only screen and (min-width: 565px) {
   .current-episode {
     margin: 0px auto;
