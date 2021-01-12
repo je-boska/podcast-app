@@ -33,46 +33,45 @@ const Footer = () => {
   })
 
   return (
-    <div className='footer'>
+    <>
       <audio id='audio' src={episodeUrl}>
         No audio
       </audio>
-      <div className='footer-items'>
-        {trackName && (
-          <div className='footer-play-button'>
-            {loading ? (
-              <Loader color='white' />
-            ) : (
-              <Play playing={playing} setPlaying={setPlaying} />
-            )}
+      {trackName && (
+        <div className='footer'>
+          <div className='footer-items'>
+            <div className='footer-play-button'>
+              {loading ? (
+                <Loader color='white' />
+              ) : (
+                <Play playing={playing} setPlaying={setPlaying} />
+              )}
+            </div>
+            <div className='footer-bar-container'>
+              <Bar
+                playing={playing}
+                trackId={trackId}
+                setPlaying={setPlaying}
+                header={true}
+              />
+            </div>
+            <Link
+              to={`${
+                currentScreen === 'current-episode' ? '/' : '/current-episode'
+              }`}
+              style={{ textDecoration: 'none', color: 'white' }}>
+              <h2 className='footer-nav-button'>
+                {currentScreen === 'current-episode' ? (
+                  <i className='fas fa-bars'></i>
+                ) : (
+                  <i className='fas fa-chevron-up'></i>
+                )}
+              </h2>
+            </Link>
           </div>
-        )}
-        {trackName && (
-          <div className='footer-bar-container'>
-            <Bar
-              playing={playing}
-              trackId={trackId}
-              setPlaying={setPlaying}
-              header={true}
-            />
-          </div>
-        )}
-        <Link
-          to={`${
-            currentScreen === 'current-episode' ? '/' : '/current-episode'
-          }`}
-          style={{ textDecoration: 'none', color: 'white' }}
-        >
-          <h2 className='footer-nav-button'>
-            {currentScreen === 'current-episode' ? (
-              <i className='fas fa-bars'></i>
-            ) : (
-              <i className='fas fa-chevron-up'></i>
-            )}
-          </h2>
-        </Link>
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   )
 }
 
