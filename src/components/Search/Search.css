@@ -40,3 +40,15 @@
   max-width: 600px;
   margin: 0px 8px;
 }
+
+.show-more-results-container {
+  width: 100%;
+  display: flex;
+}
+
+.show-more-results {
+  cursor: pointer;
+  padding: 8px;
+  color: blue;
+  margin-left: auto;
+}

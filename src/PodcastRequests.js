@@ -2,7 +2,11 @@ import axios from 'axios'
 
 export async function searchPodcasts(searchTerm, limit) {
   const { data } = await axios.get(`/api/search/${searchTerm}/${limit}`)
-  return data
+  let moreResults = true
+  if (data.length < limit) {
+    moreResults = false
+  }
+  return { results: data, moreResults }
 }
 
 export async function lookupEpisodes(id) {

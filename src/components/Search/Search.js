@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Search.css'
 import { searchPodcasts } from '../../PodcastRequests'
 import { useSelector, useDispatch } from 'react-redux'
@@ -23,6 +23,8 @@ const Search = () => {
   const searchTerm = useSelector(selectSearchTerm)
   const results = useSelector(selectSearchResults)
 
+  const [areMoreResults, setAreMoreResults] = useState(true)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -36,8 +38,9 @@ const Search = () => {
   const getSearchResults = async (limit = 10) => {
     dispatch(setSearching(true))
     dispatch(setLoading(true))
-    const newResults = await searchPodcasts(searchTerm, limit)
-    dispatch(setSearchResults(newResults))
+    const { results, moreResults } = await searchPodcasts(searchTerm, limit)
+    setAreMoreResults(moreResults)
+    dispatch(setSearchResults(results))
     dispatch(setLoading(false))
   }
 
@@ -107,22 +110,13 @@ const Search = () => {
                 ))
               )}
             </div>
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-              }}
-              onClick={showMoreResultsHandler}>
-              <p
-                style={{
-                  cursor: 'pointer',
-                  color: 'blue',
-                  padding: '8px',
-                  marginLeft: 'auto',
-                }}>
-                Show more results
-              </p>
-            </div>
+            {areMoreResults && (
+              <div
+                className='show-more-results-container'
+                onClick={showMoreResultsHandler}>
+                <p className='show-more-results'>Show more results</p>
+              </div>
+            )}
           </div>
         )
       )}
