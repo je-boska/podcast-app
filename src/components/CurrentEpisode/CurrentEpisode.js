@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { setCurrentScreen } from '../../slices/playerSlice'
 import {
   selectCurrentEpisode,
@@ -36,11 +37,13 @@ const CurrentEpisode = () => {
   return (
     <>
       <div className='current-episode'>
-        <img src={artworkUrl600} alt={trackName} />
+        <Link to='/episode-list'>
+          <img src={artworkUrl600} alt={trackName} />
+        </Link>
         <div className='current-episode-info'>
           <h3>{collectionName}</h3>
           <h4>{trackName ? trackName : 'No current episode'}</h4>
-          <p>{formattedDate}</p>
+          <p className='current-episode-date'>{formattedDate}</p>
           <p>
             {description && description.length > 200 && !viewFullDescription
               ? `${description.slice(0, 200)}...`
@@ -48,8 +51,7 @@ const CurrentEpisode = () => {
             {description && description.length > 200 && !viewFullDescription && (
               <strong
                 style={{ cursor: 'pointer', color: 'blue', fontWeight: '300' }}
-                onClick={() => setViewFullDescription(true)}
-              >
+                onClick={() => setViewFullDescription(true)}>
                 Read more
               </strong>
             )}

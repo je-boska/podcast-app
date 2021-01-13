@@ -30,8 +30,8 @@
   margin: 10px 20px;
 }
 
-.current-episode-info p {
-  opacity: 0.8;
+.current-episode-date {
+  opacity: 0.6;
 }
 
 @media only screen and (min-width: 565px) {
