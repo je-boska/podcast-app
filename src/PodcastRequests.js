@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export async function searchPodcasts(searchTerm) {
-  const { data } = await axios.get(`/api/search/${searchTerm}`)
+export async function searchPodcasts(searchTerm, limit) {
+  const { data } = await axios.get(`/api/search/${searchTerm}/${limit}`)
   return data
 }
 

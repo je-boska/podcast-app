@@ -18,11 +18,12 @@ import PodcastListItem from '../PodcastListItem/PodcastListItem'
 import { setSubscriptions } from '../../slices/subscriptionsSlice'
 
 const Search = () => {
-  const dispatch = useDispatch()
   const searching = useSelector(selectSearching)
   const loading = useSelector(selectLoading)
   const searchTerm = useSelector(selectSearchTerm)
   const results = useSelector(selectSearchResults)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const localSubscriptions = JSON.parse(localStorage.getItem('subscriptions'))
@@ -32,10 +33,10 @@ const Search = () => {
     // eslint-disable-next-line
   }, [])
 
-  const getSearchResults = async () => {
+  const getSearchResults = async (limit = 10) => {
     dispatch(setSearching(true))
     dispatch(setLoading(true))
-    const newResults = await searchPodcasts(searchTerm)
+    const newResults = await searchPodcasts(searchTerm, limit)
     dispatch(setSearchResults(newResults))
     dispatch(setLoading(false))
   }
@@ -48,14 +49,17 @@ const Search = () => {
     }
   }
 
+  const showMoreResultsHandler = () => {
+    getSearchResults(results.length + 10)
+  }
+
   return (
     <div className='search-container'>
       <form
         onSubmit={e => {
           submitHandler(e)
         }}
-        className='search-bar'
-      >
+        className='search-bar'>
         <div
           className='search-icon'
           onClick={e => {
@@ -66,8 +70,7 @@ const Search = () => {
             } else {
               submitHandler(e)
             }
-          }}
-        >
+          }}>
           {searching ? (
             <i className='fas fa-times' />
           ) : (
@@ -103,6 +106,22 @@ const Search = () => {
                   />
                 ))
               )}
+            </div>
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+              }}
+              onClick={showMoreResultsHandler}>
+              <p
+                style={{
+                  cursor: 'pointer',
+                  color: 'blue',
+                  padding: '8px',
+                  marginLeft: 'auto',
+                }}>
+                Show more results
+              </p>
             </div>
           </div>
         )
