@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './Footer.css'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -17,20 +17,6 @@ const Footer = () => {
 
   const { values, setPlaying } = useAudioPlayer()
   const { playing } = values
-
-  useEffect(() => {
-    const playOnSpace = e => {
-      if (e.code === 'Space') {
-        setPlaying(!playing)
-      }
-    }
-
-    document.addEventListener('keyup', playOnSpace)
-
-    return () => {
-      document.removeEventListener('keyup', playOnSpace)
-    }
-  })
 
   return (
     <>
